@@ -24,7 +24,7 @@
         </tr>
       </tbody>
     </table>
-    <button>date</button>
+
     <v-select :items="date" filled label="Date"></v-select>
   </div>
 </template>
