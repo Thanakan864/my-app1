@@ -10,9 +10,11 @@
     </div>
     <div v-if="content_value" class="content-home" id="vector">
       <h1>Content vector station</h1>
+      <HomeVectorStation/>
     </div>
     <div v-else class="content-home" id="adwmeter">
       <h1>Content ADW</h1>
+      <HomeADW/>
     </div>
   </div>
 </template>
@@ -72,11 +74,14 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
-
+import HomeVectorStation from '@/components/HomeVectorStation.vue'
+import HomeADW from '@/components/HomeADW.vue'
 export default {
   name: "home",
   components: {
     HelloWorld,
+    HomeVectorStation,
+    HomeADW,
   },
   data() {
     return {

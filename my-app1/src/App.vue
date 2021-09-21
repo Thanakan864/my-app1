@@ -2,8 +2,8 @@
   <div id="app">
     <div class="sidebar">
       <div class="sidebar-logo">
-        <img src="assets/logo1.png" alt="logo1" />
-        <img src="assets/logo2.png" alt="logo2" />
+        <img src="./assets/logo1.png" alt="logo1" />
+        <img src="./assets/logo2.png" alt="logo2" />
       </div>
       <div class="iot-platform"><h1>IOT-PLATFORM</h1></div>
       <div id="nav">
@@ -110,6 +110,7 @@ export default {
 
 .sidebar-logo {
   margin: 20px 10px;
+  
 }
 
 .sidebar-logo img:nth-child(1) {

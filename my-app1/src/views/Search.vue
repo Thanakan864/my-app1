@@ -10,10 +10,11 @@
     </div>
     <div v-if = "content_value" class="content-search" id="water">
       <h1 >Content Water</h1>
-      <waterTable/>
+      <WaterTable/>
     </div>
     <div v-else class="content-search" id="lysimeter">
       <h1 >Content Lysi meter</h1>
+      <LysiTable/>
     </div>
   </div>
 </template>
@@ -76,19 +77,24 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import WaterTable from '@/components/WaterTable.vue'
-
-
+import LysiTable from '@/components/LysiTable.vue'
+// import DatePicker from '@/components/DatePicker.vue'
+import DatePicker from 'vue2-datepicker'
 export default {
   name: 'Search',
   components: {
     HelloWorld,
-    WaterTable
+    WaterTable,
+    LysiTable,
+    DatePicker,
   },
   data() {
     return {
       content_value:true,
       water_btn_class:"btn-menu-active",
-      lysi_btn_class:"btn-menu"
+      lysi_btn_class:"btn-menu",
+      date:'',
+      
     }
   },
   methods: {
