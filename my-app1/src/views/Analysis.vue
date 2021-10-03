@@ -10,10 +10,13 @@
     </div>
     <div v-if = "content_value" class="content-analysis" id="water">
       <h1 >Content Water</h1>
+      <ChartWater/>
+
       
     </div>
     <div v-else class="content-analysis" id="lysimeter">
       <h1 >Content Lysi meter</h1>
+      <ChartLysi/>
       
     </div>
   </div>
@@ -74,12 +77,19 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
+import ChartWater from '@/components/ChartWater.vue'
+import ChartLysi from '@/components/ChartLysi.vue'
+// import ChartWaterJS from '@/components/ChartWaterJS.js'
+
 
 
 export default {
   name: 'analysis',
   components: {
-    HelloWorld
+    HelloWorld,
+    ChartWater,
+    ChartLysi,
+    
   },
   data() {
     return {
