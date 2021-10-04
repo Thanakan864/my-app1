@@ -25,7 +25,39 @@
       </tbody>
     </table>
 
-    <v-select :items="date" filled label="Date"></v-select>
+    <div id="app-picker">
+      <v-app id="inspire">
+        <v-row>
+          <v-col
+            cols="12"
+            sm="3"
+          >
+            <v-date-picker
+              v-model="dates"
+              range
+              no-title
+              
+            ></v-date-picker>
+          </v-col>
+          <v-col
+            cols="12"
+            sm="3"
+          >
+            <v-text-field
+              v-model="dateRangeText"
+              label="Date range"
+              prepend-icon="mdi-calendar"
+              readonly
+            ></v-text-field>
+            model: {{ dates }}
+          </v-col>
+        </v-row>
+      </v-app>
+    </div>
+    
+      
+      
+      
   </div>
 </template>
 <script>
@@ -35,8 +67,13 @@ export default {
   data() {
     return {
       info: null,
-      date: ["Foo", "Bar", "Fizz", "Buzz"],
+      dates: ['2021-05-01', '2021-05-09'],
     };
+  },
+  computed: {
+        dateRangeText() {
+          return this.dates.join(' ~ ')
+    },
   },
   mounted() {
     // console.log('water')
@@ -52,6 +89,7 @@ export default {
         // }
       });
   },
+  
 };
 </script>
 <style scoped>

@@ -41,6 +41,7 @@
 
 <script>
 export default {
+  
   data() {
     return {
       home_btn_active: "nav_active",
@@ -49,14 +50,44 @@ export default {
       location_btn_active: "nav_deactive",
     };
   },
+  //get URL for change color navigator Home , Search , Analysis , Location
+  mounted(nameBtn){
+    var url = window.location.href;
+        console.log(url)
+        if (nameBtn == "home"|| url == "http://localhost:8080/") {
+        this.home_btn_active = "nav_active";
+        this.search_btn_active = "nav_deactive";
+        this.analysis_btn_active = "nav_deactive";
+        this.location_btn_active = "nav_deactive";
+        
+      } else if (nameBtn == "search" || url == "http://localhost:8080/Search") {
+        this.home_btn_active = "nav_deactive";
+        this.search_btn_active = "nav_active";
+        this.analysis_btn_active = "nav_deactive";
+        this.location_btn_active = "nav_deactive";
+      } else if (nameBtn == "analysis" || url == "http://localhost:8080/Analysis") {
+        this.home_btn_active = "nav_deactive";
+        this.search_btn_active = "nav_deactive";
+        this.analysis_btn_active = "nav_active";
+        this.location_btn_active = "nav_deactive";
+      } else if (nameBtn == "location" || url == "http://localhost:8080/Location") {
+        this.home_btn_active = "nav_deactive";
+        this.search_btn_active = "nav_deactive";
+        this.analysis_btn_active = "nav_deactive";
+        this.location_btn_active = "nav_active";
+      }
+  },
 
   methods: {
+    //event onclick navigator Home , Search , Analysis , Location
     onClickNavBtn: function (nameBtn) {
+      
       if (nameBtn == "home") {
         this.home_btn_active = "nav_active";
         this.search_btn_active = "nav_deactive";
         this.analysis_btn_active = "nav_deactive";
         this.location_btn_active = "nav_deactive";
+        
       } else if (nameBtn == "search") {
         this.home_btn_active = "nav_deactive";
         this.search_btn_active = "nav_active";
@@ -171,6 +202,6 @@ export default {
 
 .content {
   grid-area: content;
-  background-color: #adb942;
+  /* background-color: #adb942; */
 }
 </style>

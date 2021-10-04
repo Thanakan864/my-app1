@@ -68,7 +68,7 @@
 }
 .content-search {
   grid-area: content-search;
-  background-color: #adb942;
+  /* background-color: #adb942; */
 }
 
 </style>
