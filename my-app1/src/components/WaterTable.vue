@@ -32,24 +32,28 @@
             cols="12"
             sm="3"
           >
-            <v-date-picker
-              v-model="dates"
-              range
-              no-title
-              
-            ></v-date-picker>
-          </v-col>
-          <v-col
-            cols="12"
-            sm="3"
-          >
             <v-text-field
               v-model="dateRangeText"
+              v-on:click = "click_text()"
               label="Date range"
               prepend-icon="mdi-calendar"
               readonly
             ></v-text-field>
-            model: {{ dates }}
+            <div class="picker-dialog"
+            v-if="state_text_click === true">
+              <v-date-picker
+                v-model="dates"
+                range
+                no-title
+              ></v-date-picker>
+              <v-btn
+                v-on:click="click_btn()"
+                block
+                color="primary"
+                elevation="2"
+              >OK</v-btn>
+            </div>
+            
           </v-col>
         </v-row>
       </v-app>
@@ -67,13 +71,34 @@ export default {
   data() {
     return {
       info: null,
+      state_text_click:false,
       dates: ['2021-05-01', '2021-05-09'],
+      // dates: ['Start Date', 'End Date'],
     };
   },
   computed: {
         dateRangeText() {
+          
           return this.dates.join(' ~ ')
     },
+  },
+  methods: {
+    click_text: function (event) {
+      
+      if(this.state_text_click == false){
+        console.log("click_text_state=true")
+        return this.state_text_click = true
+      }
+      else {
+        console.log("click_text_state=false")
+        return this.state_text_click = false
+      }
+    },
+    click_btn: function(event){
+      console.log("click_btn_OK")
+      console.log(this.dates)
+      return this.state_text_click = false
+    }
   },
   mounted() {
     // console.log('water')

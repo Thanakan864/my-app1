@@ -1,5 +1,8 @@
 <template>
 <div class="area-water">
+    <div class="date-select">
+        <DatePicker/>
+    </div>
     <div class="ctn-chart-water">
         <!-- chart.js component -->
         <LineChart :chart-data = 'datacollection'></LineChart>
@@ -16,10 +19,12 @@
 </style>
 <script>
 import LineChart from './ChartWaterJS.js'
+import DatePicker from './DatePicker.vue'
 export default {
     name:'chart-water',
     components:{
         LineChart,
+        DatePicker
     },
     data(){
         return{

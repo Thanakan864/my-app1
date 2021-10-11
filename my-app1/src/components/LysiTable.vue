@@ -1,45 +1,52 @@
 <template>
-  <div id="water-table">
-    <table>
-      <thead>
-        <tr>
-          <th>D/M/Y</th>
-          <th>PADDY</th>
-          <th>Rain gauge</th>
-          <th>Cut Throatful</th>
-          <th>Class A Pan</th>
-          <th>AWD</th>
-          <th>P</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item of info" v-bind:key="item.id">
-          <td>{{ item["D/M/Y"] }}</td>
-          <td>{{ item["PADDY"] }}</td>
-          <td>{{ item["Rain gauge"] }}</td>
-          <td>{{ item["Cut Throatful"] }}</td>
-          <td>{{ item["Class A Pan"] }}</td>
-          <td>{{ item["AWD"] }}</td>
-          <td>{{ item["P"] }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <v-select :items="date" filled label="Date"></v-select>
+  <div id="lysi-table">
+    <div class="date-select">
+      <div class="date_box"><DatePicker/></div>
+    </div>
+    <div class="table-show">
+      <table>
+        <thead>
+          <tr>
+            <th>D/M/Y</th>
+            <th>PADDY</th>
+            <th>Rain gauge</th>
+            <th>Cut Throatful</th>
+            <th>Class A Pan</th>
+            <th>AWD</th>
+            <th>P</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item of info" v-bind:key="item.id">
+            <td>{{ item["D/M/Y"] }}</td>
+            <td>{{ item["PADDY"] }}</td>
+            <td>{{ item["Rain gauge"] }}</td>
+            <td>{{ item["Cut Throatful"] }}</td>
+            <td>{{ item["Class A Pan"] }}</td>
+            <td>{{ item["AWD"] }}</td>
+            <td>{{ item["P"] }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
   </div>
 </template>
 <script>
 import axios from "axios";
+import DatePicker from './DatePicker.vue'
 export default {
-  name: "water-table",
+  name: "lysi-table",
+  components:{
+    DatePicker,
+  },
   data() {
     return {
       info: null,
-      date: ["Foo", "Bar", "Fizz", "Buzz"],
     };
   },
   mounted() {
-    // console.log('water')
+    // console.log('lysi')
     axios
       .get(
         "https://script.google.com/macros/s/AKfycbzDm1SNtXwsmaQo2s0NFRrfWNrCX05QH-hDmRLxMnotWiohnOQk9KQQM9xfqL90lYzX/exec?action=getDatas"
@@ -82,4 +89,5 @@ table th {
   background-color: #04aa6d;
   color: white;
 }
+
 </style>
