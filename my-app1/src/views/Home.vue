@@ -1,20 +1,20 @@
 <template>
   <div class="home">
     <div class="menu-home">
-      <div @click="onClickMenuBtn('vector')" :class="vector_btn_class">
-        <p>Vector Station</p>
+      <div @click="onClickMenuBtn('weather')" :class="weather_btn_class">
+        <p>Weather</p>
       </div>
       <div @click="onClickMenuBtn('adw')" :class="adw_btn_class">
-        <p>ADW</p>
+        <p>AWD</p>
       </div>
     </div>
-    <div v-if="content_value" class="content-home" id="vector">
-      <h1>Content vector station</h1>
-      <HomeVectorStation/>
+    <div v-if="content_value" class="content-home" id="weather">
+      <h1>Content weather station</h1>
+      <HomeWeather/>
     </div>
     <div v-else class="content-home" id="adwmeter">
-      <h1>Content ADW</h1>
-      <HomeADW/>
+      <h1>Content AWD</h1>
+      <HomeAWD/>
     </div>
   </div>
 </template>
@@ -62,7 +62,7 @@
 #adwmeter {
   background-color: #ffffff;
 }
-#vector {
+#weather {
   background-color: #ffffff;
 }
 .content-home {
@@ -74,35 +74,35 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
-import HomeVectorStation from '@/components/HomeVectorStation.vue'
-import HomeADW from '@/components/HomeADW.vue'
+import HomeWeather from '@/components/HomeWeather.vue'
+import HomeAWD from '@/components/HomeAWD.vue'
 export default {
   name: "home",
   components: {
     HelloWorld,
-    HomeVectorStation,
-    HomeADW,
+    HomeWeather,
+    HomeAWD,
   },
   data() {
     return {
       content_value: true,
-      vector_btn_class: "btn-menu-active",
+      weather_btn_class: "btn-menu-active",
       adw_btn_class: "btn-menu",
     };
   },
   methods: {
     onClickMenuBtn: function (name) {
-      if (name == "vector") {
-        this.vector_btn_class = "btn-menu-active";
+      if (name == "weather") {
+        this.weather_btn_class = "btn-menu-active";
         this.adw_btn_class = "btn-menu";
         this.content_value = true;
       } else if (name == "adw") {
-        this.vector_btn_class = "btn-menu";
+        this.weather_btn_class = "btn-menu";
         this.adw_btn_class = "btn-menu-active";
         this.content_value = false;
       }
 
-      console.log(this.vector_btn_class);
+      console.log(this.weather_btn_class);
     },
   },
 };

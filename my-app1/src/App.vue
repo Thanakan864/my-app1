@@ -2,32 +2,32 @@
   <div id="app">
     <div class="sidebar">
       <div class="sidebar-logo">
-        <img src="./assets/logo1.png" alt="logo1" />
+        <img src="./assets/logo1.jpg" alt="logo1" />
         <img src="./assets/logo2.png" alt="logo2" />
       </div>
       <div class="iot-platform"><h1>IOT-PLATFORM</h1></div>
       <div id="nav">
         <router-link to="/">
           <div :class="home_btn_active" @click="onClickNavBtn('home')">
-            <i class="fa fa-home" aria-hidden="true"></i>
+            <i id="icon-home" class="fa fa-home" aria-hidden="true"></i>
             <p>HOME</p>
           </div>
         </router-link>
         <router-link to="/Search">
           <div :class="search_btn_active" @click="onClickNavBtn('search')">
-            <i class="fa fa-search" aria-hidden="true"></i>
+            <i id="icon-search" class="fa fa-search" aria-hidden="true"></i>
             <p>SEARCH</p>
           </div>
         </router-link>
         <router-link to="/Analysis">
           <div :class="analysis_btn_active" @click="onClickNavBtn('analysis')">
-            <i class="fa fa-line-chart" aria-hidden="true"></i>
+            <i id="icon-analysis" class="fa fa-line-chart" aria-hidden="true"></i>
             <p>ANALYSIS</p>
           </div>
         </router-link>
         <router-link to="/Location">
           <div :class="location_btn_active" @click="onClickNavBtn('location')">
-            <i class="fa fa-map-marker" aria-hidden="true"></i>
+            <i id="icon-location" class="fa fa-map-marker" aria-hidden="true"></i>
             <p>LOCATION</p>
           </div>
         </router-link>
@@ -140,21 +140,23 @@ export default {
 }
 
 .sidebar-logo {
-  margin: 20px 10px;
+  margin: 20px 25px;
   
 }
 
 .sidebar-logo img:nth-child(1) {
-  width: 80px;
+  width: 60px;
   height: 80px;
+  margin-top:0px;
   /* background-color: blue; */
 }
 
 .sidebar-logo img:nth-child(2) {
-  margin-left: 5px;
+  margin-left: 10px;
+  margin-top:0px;
   width: 80px;
   height: 80px;
-  padding-bottom: 15px;
+  padding-bottom: 0px;
   /* background-color: blue; */
 }
 /*********************************************END LOGO*****************************************************/
@@ -175,10 +177,16 @@ export default {
   display: inline;
   text-decoration: none;
 }
+#icon-analysis{
+  margin-right: -1px;
+}
+#icon-location{
+  margin-right: 7px;
+}
 
 .nav_deactive {
   padding: 20px 10px;
-  padding-left: 50px;
+  padding-left: 40px;
   /* margin-left:30px ; */
   color: #fff;
   font-size: 1rem;
@@ -187,7 +195,7 @@ export default {
 }
 .nav_active {
   padding: 20px 10px;
-  padding-left: 50px;
+  padding-left: 40px;
   color: #adb942;
   font-size: 1rem;
   font-weight: bold;
