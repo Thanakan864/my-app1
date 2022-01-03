@@ -141,6 +141,10 @@ export default {
 .col p{
     color: rgb(255, 255, 255);
 }
+
+.item-adw1 img,.item-adw2 img,.item-adw3 img{
+    width: 80px;
+}
 .item-adw1,.item-adw3{
     display: flex;
     background-color: rgb(43, 41, 161);
