@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div class="chart1">
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+<script>
+
+var data_red=[13,4,2,3,45,5,34,4,84,55]
+var data_blue = [4,13,2,3,34,1,2,7,64,3]
+var date_table = ["1/01/2021","1/01/2021","1/01/2021","1/01/2021","1/01/2021","1/01/2021","1/01/2021","1/01/2021","1/01/2021","1/01/2021"]
+
+const ctx = document.getElementById('myChart');
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: date_table,
+        datasets: [{
+                    label: 'Water1',
+                    data: data_red,
+                    backgroundColor: 'rgba(0, 0, 0, 0.0)',
+                    borderColor:'red',
+                    pointBackgroundColor:'red',
+                    borderWidth: 1,
+                    pointBorderColor:'undefined',
+                    
+                },
+                {
+                    label: 'Water2',
+                    data: data_blue,
+                    backgroundColor: 'rgba(0, 0, 0, 0.0)',
+                    borderColor:'blue',
+                    pointBackgroundColor:'blue',
+                    borderWidth: 1,
+                    pointBorderColor:'undefined',
+                    
+                }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+<style>
+    .chart1{
+        width: 400px;
+        height: 400px;
+
+    }
+</style>
+    
+</body>
+   
+</html>

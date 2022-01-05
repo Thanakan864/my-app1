@@ -3,24 +3,28 @@
     <table>
       <thead>
         <tr>
-          <th>D/M/Y</th>
-          <th>PADDY</th>
-          <th>Rain gauge</th>
-          <th>Cut Throatful</th>
-          <th>Class A Pan</th>
-          <th>AWD</th>
-          <th>P</th>
+          <th>Date</th>
+          <th>A</th>
+          <th>B</th>
+          <th>C</th>
+          <th>D</th>
+          <th>E</th>
+          <th>F</th>
+          <th>G</th>
+          <th>H</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item of info" v-bind:key="item.id">
-          <td>{{ item["D/M/Y"] }}</td>
-          <td>{{ item["PADDY"] }}</td>
-          <td>{{ item["Rain gauge"] }}</td>
-          <td>{{ item["Cut Throatful"] }}</td>
-          <td>{{ item["Class A Pan"] }}</td>
-          <td>{{ item["AWD"] }}</td>
-          <td>{{ item["P"] }}</td>
+          <td>{{ item["Date"] }}</td>
+          <td>{{ item["A"] }}</td>
+          <td>{{ item["B"] }}</td>
+          <td>{{ item["C"] }}</td>
+          <td>{{ item["D"] }}</td>
+          <td>{{ item["E"] }}</td>
+          <td>{{ item["F"] }}</td>
+          <td>{{ item["G"] }}</td>
+          <td>{{ item["H"] }}</td>
         </tr>
       </tbody>
     </table>
@@ -65,6 +69,7 @@
   </div>
 </template>
 <script>
+
 import axios from "axios";
 export default {
   name: "water-table",
@@ -104,7 +109,8 @@ export default {
     // console.log('water')
     axios
       .get(
-        "https://script.google.com/macros/s/AKfycbzDm1SNtXwsmaQo2s0NFRrfWNrCX05QH-hDmRLxMnotWiohnOQk9KQQM9xfqL90lYzX/exec?action=getDatas"
+        "https://script.google.com/macros/s/AKfycbyn9rKaQXdHzu3n-ocdq2OdKJmmsxNOlNRKFhiCSDpxPbxsYfD49mvwd52k1Za92WezIw/exec?action=getUsers"
+        // "https://script.google.com/macros/s/AKfycbzDm1SNtXwsmaQo2s0NFRrfWNrCX05QH-hDmRLxMnotWiohnOQk9KQQM9xfqL90lYzX/exec?action=getDatas"
       )
       .then((response) => {
         this.info = response.data;
