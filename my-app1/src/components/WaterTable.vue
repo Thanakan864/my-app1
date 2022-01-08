@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item of info" v-bind:key="item.id">
+        <tr v-for="item of this.sprit_data" v-bind:key="item.id">
           <td>{{ item["Date"] }}</td>
           <td>{{ item["A"] }}</td>
           <td>{{ item["B"] }}</td>
@@ -76,8 +76,9 @@ export default {
   data() {
     return {
       info: null,
+      sprit_data:[],
       state_text_click:false,
-      dates: ['2021-05-01', '2021-05-09'],
+      dates: [(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0,8)+"01",(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)],
       // dates: ['Start Date', 'End Date'],
     };
   },
@@ -101,7 +102,9 @@ export default {
     },
     click_btn: function(event){
       console.log("click_btn_OK")
-      console.log(this.dates)
+      // console.log(this.dates)
+      var select_date = this.dates;
+      console.log(select_date)
       return this.state_text_click = false
     }
   },
@@ -118,6 +121,17 @@ export default {
         // for(let item of this.info){
         //   console.log(item.PADDY)
         // }
+        var data=[];
+        for(var item of this.info)
+        { 
+          // console.log(item.Date)
+          if(item.A<10){
+            data.push(item)
+          }
+        }
+        this.sprit_data = data;
+        console.log(this.sprit_data)
+        
       });
   },
   
