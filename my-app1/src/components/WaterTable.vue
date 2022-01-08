@@ -16,7 +16,7 @@
       </thead>
       <tbody>
         <tr v-for="item of this.sprit_data" v-bind:key="item.id">
-          <td>{{ item["Date"] }}</td>
+          <td>{{ item["Date"].substr(0,10) }}</td>
           <td>{{ item["A"] }}</td>
           <td>{{ item["B"] }}</td>
           <td>{{ item["C"] }}</td>
@@ -102,10 +102,21 @@ export default {
     },
     click_btn: function(event){
       console.log("click_btn_OK")
-      // console.log(this.dates)
+      console.log(this.dates)
       var select_date = this.dates;
-      console.log(select_date)
-      return this.state_text_click = false
+      var start_date = new Date(select_date[0]);
+      var end_date = new Date(select_date[1]);
+      var sprit_date;
+      var data_select=[];
+      for(var item of this.info) {
+        sprit_date = new Date(item.Date.substr(0,10));
+        if(start_date<=sprit_date&&sprit_date<=end_date){
+          console.log(item)
+          data_select.push(item)
+        }
+      }
+      console.log(data_select) 
+      return this.state_text_click = false, this.sprit_data = data_select
     }
   },
   mounted() {
@@ -121,16 +132,20 @@ export default {
         // for(let item of this.info){
         //   console.log(item.PADDY)
         // }
-        var data=[];
-        for(var item of this.info)
-        { 
-          // console.log(item.Date)
-          if(item.A<10){
-            data.push(item)
+        var select_date = this.dates;
+        var start_date = new Date(select_date[0]);
+        var end_date = new Date(select_date[1]);
+        var sprit_date;
+        var data_select=[];
+        for(var item of this.info) {
+          sprit_date = new Date(item.Date.substr(0,10));
+          if(start_date<=sprit_date&&sprit_date<=end_date){
+            console.log(item)
+            data_select.push(item)
           }
         }
-        this.sprit_data = data;
-        console.log(this.sprit_data)
+        this.sprit_data = data_select;
+        console.log(data_select) 
         
       });
   },
