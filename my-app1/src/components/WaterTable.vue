@@ -74,12 +74,21 @@ import axios from "axios";
 export default {
   name: "water-table",
   data() {
+    /// get Datenow - 15 day ///
+        var d = new Date();
+        // console.log(d.toLocaleString())
+        // console.log(d.toISOString())
+        this.date_now = d.toISOString().substr(0,10)
+        d.setDate(d.getDate() - 15);
+        this.date_old = d.toISOString().substr(0,10)
+    /// END get Datenow - 15 day ///
     return {
       info: null,
       sprit_data:[],
       state_text_click:false,
-      dates: [(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0,8)+"01",(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)],
-      // dates: ['Start Date', 'End Date'],
+      date_now:null,
+      date_old:null,
+      dates: [this.date_old,this.date_now],
     };
   },
   computed: {
@@ -92,21 +101,43 @@ export default {
     click_text: function (event) {
       
       if(this.state_text_click == false){
-        console.log("click_text_state=true")
+        // console.log("click_text_state=true")
         return this.state_text_click = true
       }
       else {
-        console.log("click_text_state=false")
+        // console.log("click_text_state=false")
         return this.state_text_click = false
       }
     },
     click_btn: function(event){
-      console.log("click_btn_OK")
-      console.log(this.dates)
+      // console.log("click_btn_OK")
+      // console.log(this.dates)
       var select_date = this.dates;
       var start_date = new Date(select_date[0]);
       var end_date = new Date(select_date[1]);
       var sprit_date;
+      // console.log(select_date[0],select_date[1])
+      
+      if(select_date[0]==null || select_date[1]==null){
+          // console.log("no")
+          alert("Please Enter Date for Start to END")
+        }
+      if(start_date>end_date){
+          alert("Please enter a valid start to end date.")
+      }
+      else{
+          var data_select=[];
+          for(var item of this.info) {
+          sprit_date = new Date(item.Date.substr(0,10));
+          if(start_date<=sprit_date&&sprit_date<=end_date){
+            // console.log(item)
+            data_select.push(item)
+              }
+            }
+          // console.log(data_select) 
+          return this.state_text_click = false, this.sprit_data = data_select
+          }
+
       var data_select=[];
       for(var item of this.info) {
         sprit_date = new Date(item.Date.substr(0,10));
@@ -120,33 +151,39 @@ export default {
     }
   },
   mounted() {
-    // console.log('water')
     axios
       .get(
         "https://script.google.com/macros/s/AKfycbyn9rKaQXdHzu3n-ocdq2OdKJmmsxNOlNRKFhiCSDpxPbxsYfD49mvwd52k1Za92WezIw/exec?action=getUsers"
-        // "https://script.google.com/macros/s/AKfycbzDm1SNtXwsmaQo2s0NFRrfWNrCX05QH-hDmRLxMnotWiohnOQk9KQQM9xfqL90lYzX/exec?action=getDatas"
       )
       .then((response) => {
         this.info = response.data;
-        console.log(response.data);
-        // for(let item of this.info){
-        //   console.log(item.PADDY)
-        // }
+        // console.log(response.data);
         var select_date = this.dates;
         var start_date = new Date(select_date[0]);
         var end_date = new Date(select_date[1]);
         var sprit_date;
+        var data_filter=[];
         var data_select=[];
-        for(var item of this.info) {
+        var d;
+       ///// filer set Date to correct /////
+        for(var item of this.info){
+          d = new Date(item.Date)
+          d.setDate(d.getDate(item.Date)+ 1);
+          item.Date = d.toISOString().substr(0,10)
+          data_filter.push(item)
+        }
+        // console.log("data_filter")
+        // console.log(data_filter)
+      ///// filer data to table follow date your select /////
+        for(var item of data_filter){
           sprit_date = new Date(item.Date.substr(0,10));
           if(start_date<=sprit_date&&sprit_date<=end_date){
-            console.log(item)
+            // console.log(item)
             data_select.push(item)
-          }
         }
         this.sprit_data = data_select;
-        console.log(data_select) 
-        
+        // console.log(data_select) 
+        }
       });
   },
   
