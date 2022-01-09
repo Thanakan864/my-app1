@@ -1,6 +1,8 @@
 <template>
   <div id="water-table">
-    <table>
+    <div><button v-on:click="onExport()">Export</button></div>
+    
+    <table id="myTable">
       <thead>
         <tr>
           <th>Date</th>
@@ -71,6 +73,7 @@
 <script>
 
 import axios from "axios";
+import XLSX from 'xlsx' // import xlsx
 export default {
   name: "water-table",
   data() {
@@ -148,7 +151,14 @@ export default {
       }
       console.log(data_select) 
       return this.state_text_click = false, this.sprit_data = data_select
-    }
+    },
+    onExport: function(event) {
+      const dataWS = XLSX.utils.json_to_sheet(this.info)
+      const wb = XLSX.utils.book_new()
+      XLSX.utils.book_append_sheet(wb, dataWS)
+      XLSX.writeFile(wb,'export.xlsx')
+      
+    },
   },
   mounted() {
     axios
@@ -184,6 +194,12 @@ export default {
         this.sprit_data = data_select;
         // console.log(data_select) 
         }
+
+
+        $(document).ready( function () {
+        $('#myTable').DataTable();
+        } );
+
       });
   },
   
@@ -214,7 +230,7 @@ table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #04aa6d;
+  background-color: #2995fa;
   color: white;
 }
 </style>
