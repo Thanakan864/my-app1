@@ -1,7 +1,46 @@
 <template>
   <div id="water-table">
-    <div><button v-on:click="onExport()">Export</button></div>
-    
+    <div id="app-picker">
+      <v-row>
+        <div class="textOfDate">
+        <v-text-field
+        v-model="dateRangeText"
+        v-on:click="click_text()"
+        label="Date range"
+        prepend-icon="mdi-calendar"
+        readonly
+      ></v-text-field>
+      <div class="picker-dialog" v-if="state_text_click === true">
+        <v-date-picker
+          v-model="dates"
+          color="rgb(41 149 250)"
+          range
+          no-title
+        ></v-date-picker>
+        <v-btn
+          v-on:click="click_btn()"
+          block
+          color="rgb(41 149 250)"
+          elevation="2"
+          >OK</v-btn
+        >
+      </div>
+
+      </div>
+      <div class="exprot">
+        <v-btn
+        v-on:click="onExport()"
+        elevation="2"
+        color="rgb(41 149 250)"
+        >Export</v-btn
+      ></div>
+      </v-row>
+      
+      
+      
+      
+    </div>
+    <!-- <div class="btn-export"><v-btn v-on:click="onExport()" elevation="2" color="rgba(60, 179, 113,0.5)">Export</v-btn></div> -->
     <table id="myTable">
       <thead>
         <tr>
@@ -18,7 +57,7 @@
       </thead>
       <tbody>
         <tr v-for="item of this.sprit_data" v-bind:key="item.id">
-          <td>{{ item["Date"].substr(0,10) }}</td>
+          <td>{{ item["Date"].substr(0, 10) }}</td>
           <td>{{ item["A"] }}</td>
           <td>{{ item["B"] }}</td>
           <td>{{ item["C"] }}</td>
@@ -31,7 +70,7 @@
       </tbody>
     </table>
 
-    <div id="app-picker">
+    <!-- <div id="app-picker">
       <v-app id="inspire">
         <v-row>
           <v-col
@@ -63,56 +102,48 @@
           </v-col>
         </v-row>
       </v-app>
-    </div>
-    
-      
-      
-      
+    </div> -->
   </div>
 </template>
 <script>
-
 import axios from "axios";
-import XLSX from 'xlsx' // import xlsx
+import XLSX from "xlsx"; // import xlsx
 export default {
   name: "water-table",
   data() {
     /// get Datenow - 15 day ///
-        var d = new Date();
-        // console.log(d.toLocaleString())
-        // console.log(d.toISOString())
-        this.date_now = d.toISOString().substr(0,10)
-        d.setDate(d.getDate() - 15);
-        this.date_old = d.toISOString().substr(0,10)
+    var d = new Date();
+    // console.log(d.toLocaleString())
+    // console.log(d.toISOString())
+    this.date_now = d.toISOString().substr(0, 10);
+    d.setDate(d.getDate() - 15);
+    this.date_old = d.toISOString().substr(0, 10);
     /// END get Datenow - 15 day ///
     return {
       info: null,
-      sprit_data:[],
-      state_text_click:false,
-      date_now:null,
-      date_old:null,
-      dates: [this.date_old,this.date_now],
+      sprit_data: [],
+      state_text_click: false,
+      date_now: null,
+      date_old: null,
+      dates: [this.date_old, this.date_now],
     };
   },
   computed: {
-        dateRangeText() {
-          
-          return this.dates.join(' ~ ')
+    dateRangeText() {
+      return this.dates.join(" ~ ");
     },
   },
   methods: {
     click_text: function (event) {
-      
-      if(this.state_text_click == false){
+      if (this.state_text_click == false) {
         // console.log("click_text_state=true")
-        return this.state_text_click = true
-      }
-      else {
+        return (this.state_text_click = true);
+      } else {
         // console.log("click_text_state=false")
-        return this.state_text_click = false
+        return (this.state_text_click = false);
       }
     },
-    click_btn: function(event){
+    click_btn: function (event) {
       // console.log("click_btn_OK")
       // console.log(this.dates)
       var select_date = this.dates;
@@ -120,44 +151,42 @@ export default {
       var end_date = new Date(select_date[1]);
       var sprit_date;
       // console.log(select_date[0],select_date[1])
-      
-      if(select_date[0]==null || select_date[1]==null){
-          // console.log("no")
-          alert("Please Enter Date for Start to END")
-        }
-      if(start_date>end_date){
-          alert("Please enter a valid start to end date.")
-      }
-      else{
-          var data_select=[];
-          for(var item of this.info) {
-          sprit_date = new Date(item.Date.substr(0,10));
-          if(start_date<=sprit_date&&sprit_date<=end_date){
-            // console.log(item)
-            data_select.push(item)
-              }
-            }
-          // console.log(data_select) 
-          return this.state_text_click = false, this.sprit_data = data_select
-          }
 
-      var data_select=[];
-      for(var item of this.info) {
-        sprit_date = new Date(item.Date.substr(0,10));
-        if(start_date<=sprit_date&&sprit_date<=end_date){
-          console.log(item)
-          data_select.push(item)
+      if (select_date[0] == null || select_date[1] == null) {
+        // console.log("no")
+        alert("Please Enter Date for Start to END");
+      }
+      if (start_date > end_date) {
+        alert("Please enter a valid start to end date.");
+      } else {
+        var data_select = [];
+        for (var item of this.info) {
+          sprit_date = new Date(item.Date.substr(0, 10));
+          if (start_date <= sprit_date && sprit_date <= end_date) {
+            // console.log(item)
+            data_select.push(item);
+          }
+        }
+        // console.log(data_select)
+        return (this.state_text_click = false), (this.sprit_data = data_select);
+      }
+
+      var data_select = [];
+      for (var item of this.info) {
+        sprit_date = new Date(item.Date.substr(0, 10));
+        if (start_date <= sprit_date && sprit_date <= end_date) {
+          console.log(item);
+          data_select.push(item);
         }
       }
-      console.log(data_select) 
-      return this.state_text_click = false, this.sprit_data = data_select
+      console.log(data_select);
+      return (this.state_text_click = false), (this.sprit_data = data_select);
     },
-    onExport: function(event) {
-      const dataWS = XLSX.utils.json_to_sheet(this.info)
-      const wb = XLSX.utils.book_new()
-      XLSX.utils.book_append_sheet(wb, dataWS)
-      XLSX.writeFile(wb,'export.xlsx')
-      
+    onExport: function (event) {
+      const dataWS = XLSX.utils.json_to_sheet(this.info);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, dataWS);
+      XLSX.writeFile(wb, "export.xlsx");
     },
   },
   mounted() {
@@ -172,37 +201,34 @@ export default {
         var start_date = new Date(select_date[0]);
         var end_date = new Date(select_date[1]);
         var sprit_date;
-        var data_filter=[];
-        var data_select=[];
+        var data_filter = [];
+        var data_select = [];
         var d;
-       ///// filer set Date to correct /////
-        for(var item of this.info){
-          d = new Date(item.Date)
-          d.setDate(d.getDate(item.Date)+ 1);
-          item.Date = d.toISOString().substr(0,10)
-          data_filter.push(item)
+        ///// filer set Date to correct /////
+        for (var item of this.info) {
+          d = new Date(item.Date);
+          d.setDate(d.getDate(item.Date) + 1);
+          item.Date = d.toISOString().substr(0, 10);
+          data_filter.push(item);
         }
         // console.log("data_filter")
         // console.log(data_filter)
-      ///// filer data to table follow date your select /////
-        for(var item of data_filter){
-          sprit_date = new Date(item.Date.substr(0,10));
-          if(start_date<=sprit_date&&sprit_date<=end_date){
+        ///// filer data to table follow date your select /////
+        for (var item of data_filter) {
+          sprit_date = new Date(item.Date.substr(0, 10));
+          if (start_date <= sprit_date && sprit_date <= end_date) {
             // console.log(item)
-            data_select.push(item)
+            data_select.push(item);
+          }
+          this.sprit_data = data_select;
+          // console.log(data_select)
         }
-        this.sprit_data = data_select;
-        // console.log(data_select) 
-        }
 
-
-        $(document).ready( function () {
-        $('#myTable').DataTable();
-        } );
-
+        $(document).ready(function () {
+          $("#myTable").DataTable();
+        });
       });
   },
-  
 };
 </script>
 <style scoped>
@@ -232,5 +258,17 @@ table th {
   text-align: left;
   background-color: #2995fa;
   color: white;
+}
+#app-picker {
+  /* position: absolute; */
+  width: 290px;
+  height: auto;
+}
+.dataTables_wrapper {
+  z-index: 0;
+}
+.picker-dialog {
+  position: absolute;
+  z-index: 1;
 }
 </style>
