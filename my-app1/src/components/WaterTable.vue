@@ -16,6 +16,7 @@
           color="rgb(41 149 250)"
           range
           no-title
+          
         ></v-date-picker>
         <v-btn
           v-on:click="click_btn()"
@@ -37,7 +38,7 @@
       </v-row>
       
       
-      
+      <!-- /./././ -->
       
     </div>
     <!-- <div class="btn-export"><v-btn v-on:click="onExport()" elevation="2" color="rgba(60, 179, 113,0.5)">Export</v-btn></div> -->
