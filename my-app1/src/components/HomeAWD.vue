@@ -7,7 +7,7 @@
                     <img src="../assets/humidity.png" alt="humidity">
                     <div class="contentbox-adw">
                         <p>AWD00001</p>
-                        <p>5 CM</p>
+                        <p>{{this.info_soil.A}} CM</p>
                     </div>
                 </div>
                 <div class="item-adw1">
@@ -101,17 +101,61 @@
     
 </template>
 <script>
+import axios from "axios";
 export default {
    name: "home-adw",
-//   data() {
+  data() {
+    return{
+        info_cm:"",
+        info_mm:"",
+        info_soil:"",
+    };
+  },
+  mounted() {
+    axios
+      .get(
+        "https://script.google.com/macros/s/AKfycbxXn5GImshdySSMUPprJzp2Qbrit2Q2DENti_dWyYusEf_6Jbdi0D_4x_8-I4KDupDd/exec?action=getData"
+        )
+      .then((response) => {
+        var data_soil = response.data;
+        console.log(data_soil)
+        for(var item of data_soil){
+            this.info_soil = item
+            
+        }
+        console.log(this.info_soil)
+       })
     
+    axios
+       .get(
+        "https://script.google.com/macros/s/AKfycbxz3uFuiPeE6Kc0GaJcrjcuHnzi6gGtBKsWTtUOmufgt--O8lD-XNCx-yn2wsWGtbVN/exec?action=getData"
+        )
+      .then((response) => {
+        var data_cm = response.data;
+        console.log(data_cm)
+        for(var item of data_cm){
+            this.info_cm = item
+            
+        }
+        console.log(this.info_cm)
+       })
     
-//   },
-//   mounted() {
-    
-    
-//   },
+    axios
+       .get(
+        "https://script.google.com/macros/s/AKfycbwwEsu66T4zurvD0rkygtZrdWnS4dlY64vT39sAq99aWFeBz8tQyZIpJPYsFpLpQUSl/exec?action=getData"
+        )
+      .then((response) => {
+        var data_mm = response.data;
+        console.log(data_mm)
+        for(var item of data_mm){
+            this.info_mm = item
+            
+        }
+        console.log(this.info_mm)
+       })
+    }
 }
+
 </script>
 <style scope>
 *{
