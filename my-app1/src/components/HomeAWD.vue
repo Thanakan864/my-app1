@@ -7,7 +7,7 @@
                     <img src="../assets/humidity.png" alt="humidity">
                     <div class="contentbox-adw">
                         <p>AWD00001</p>
-                        <p>{{this.info_soil.A}} CM</p>
+                        <p>{{this.info_mm.A}} CM</p>
                     </div>
                 </div>
                 <div class="item-adw1">
