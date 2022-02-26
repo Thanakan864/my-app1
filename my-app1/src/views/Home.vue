@@ -1,20 +1,27 @@
 <template>
   <div class="home">
     <div class="menu-home">
+      <div @click="onClickMenuBtn('Irrigation')" :class="Irrigation_btn_class">
+        <p>Irrigation</p>
+      </div>
       <div @click="onClickMenuBtn('weather')" :class="weather_btn_class">
         <p>Weather</p>
       </div>
       <div @click="onClickMenuBtn('adw')" :class="adw_btn_class">
-        <p>AWD</p>
+        <p>Lysimeter</p>
       </div>
     </div>
-    <div v-if="content_value" class="content-home" id="weather">
+    <div v-if="content_value ==='Irrigation'" class="content-home" id="Irrigation">
+      <h1>Content Irrigation</h1>
+      <HomeIrrigation/>
+    </div>
+    <div v-if="content_value ==='weather'" class="content-home" id="weather">
       <h1>Content weather station</h1>
       <HomeWeather/>
     </div>
-    <div v-else class="content-home" id="adwmeter">
-      <h1>Content AWD</h1>
-      <HomeAWD/>
+    <div v-else-if="content_value ==='adw'" class="content-home" id="adwmeter">
+      <h1>Content LYSIMETER</h1>
+      <HomeLysimeter/>
     </div>
   </div>
 </template>
@@ -67,7 +74,7 @@
 }
 .content-home {
   grid-area: content-home;
-  background-color: #adb942;
+  background-color: #ffffff;
 }
 </style>
 
@@ -75,18 +82,23 @@
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
 import HomeWeather from '@/components/HomeWeather.vue'
-import HomeAWD from '@/components/HomeAWD.vue'
+import HomeLysimeter from '@/components/HomeLysimeter.vue'
+import HomeIrrigation from '@/components/HomeIrrigation.vue'
+
 export default {
   name: "home",
   components: {
     HelloWorld,
+    HomeIrrigation,
     HomeWeather,
-    HomeAWD,
+    HomeLysimeter,
   },
   data() {
     return {
-      content_value: true,
-      weather_btn_class: "btn-menu-active",
+      // content_value: true,
+      content_value:"Irrigation",
+      Irrigation_btn_class:"btn-menu-active",
+      weather_btn_class: "btn-menu",
       adw_btn_class: "btn-menu",
     };
   },
@@ -95,11 +107,22 @@ export default {
       if (name == "weather") {
         this.weather_btn_class = "btn-menu-active";
         this.adw_btn_class = "btn-menu";
-        this.content_value = true;
+        this.Irrigation_btn_class = "btn-menu";
+        // this.content_value = true;
+        this.content_value = "weather";
       } else if (name == "adw") {
         this.weather_btn_class = "btn-menu";
         this.adw_btn_class = "btn-menu-active";
-        this.content_value = false;
+        this.Irrigation_btn_class = "btn-menu";
+        // this.content_value = false;
+        this.content_value = "adw";
+      }
+      else if (name == "Irrigation") {
+        this.weather_btn_class = "btn-menu";
+        this.adw_btn_class = "btn-menu";
+        this.Irrigation_btn_class = "btn-menu-active";
+        // this.content_value = false;
+        this.content_value = "Irrigation";
       }
 
       console.log(this.weather_btn_class);

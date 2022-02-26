@@ -45,27 +45,27 @@
       <thead>
         <tr>
           <th>Date</th>
-          <th>A</th>
-          <th>B</th>
-          <th>C</th>
-          <th>D</th>
-          <th>E</th>
-          <th>F</th>
-          <th>G</th>
-          <th>H</th>
+          <th>AWD_A4</th>
+          <th>AWD_A5</th>
+          <th>AWD_A6</th>
+          <th>AWD_E3</th>
+          <th>CTH_C9</th>
+          <th>CTH_C10</th>
+          <th>CTH_C11</th>
+          <th>CTH_C12</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item of this.sprit_data" v-bind:key="item.id">
           <td>{{ item["Date"].substr(0, 10) }}</td>
-          <td>{{ item["A"] }}</td>
-          <td>{{ item["B"] }}</td>
-          <td>{{ item["C"] }}</td>
-          <td>{{ item["D"] }}</td>
-          <td>{{ item["E"] }}</td>
-          <td>{{ item["F"] }}</td>
-          <td>{{ item["G"] }}</td>
-          <td>{{ item["H"] }}</td>
+          <td>{{ item["AWD_A4"] }}</td>
+          <td>{{ item["AWD_A5"] }}</td>
+          <td>{{ item["AWD_A6"] }}</td>
+          <td>{{ item["AWD_E3"] }}</td>
+          <td>{{ item["CTH_C9"] }}</td>
+          <td>{{ item["CTH_C10"] }}</td>
+          <td>{{ item["CTH_C11"] }}</td>
+          <td>{{ item["CTH_C12"] }}</td>
         </tr>
       </tbody>
     </table>
@@ -192,7 +192,8 @@ export default {
   mounted() {
     axios
       .get(
-        "https://script.google.com/macros/s/AKfycbyn9rKaQXdHzu3n-ocdq2OdKJmmsxNOlNRKFhiCSDpxPbxsYfD49mvwd52k1Za92WezIw/exec?action=getUsers"
+        // "https://script.google.com/macros/s/AKfycbyn9rKaQXdHzu3n-ocdq2OdKJmmsxNOlNRKFhiCSDpxPbxsYfD49mvwd52k1Za92WezIw/exec?action=getUsers"
+        "https://script.google.com/macros/s/AKfycbxxE23SBHICIiZaASF6iRKcHh5aunewTXz5kL0RGZJLa-sOAABHNBCwy-GlehVh8wQ/exec?action=getData"
       )
       .then((response) => {
         this.info = response.data;
