@@ -125,7 +125,7 @@ export default {
         this.content_value = "Irrigation";
       }
 
-      console.log(this.weather_btn_class);
+      // console.log(this.weather_btn_class);
     },
   },
 };

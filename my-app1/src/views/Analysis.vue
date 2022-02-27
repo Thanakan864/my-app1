@@ -1,21 +1,26 @@
 <template>
   <div class="analysis">
     <div class="menu-analysis">
-      <div @click="onClickMenuBtn('water')" :class="water_btn_class">
-        <p>Water</p>
+      <div @click="onClickMenuBtn('Irrigation')" :class="Irrigation_btn_class">
+        <p>Irrigation</p>
+      </div>
+      <div @click="onClickMenuBtn('weather')" :class="weather_btn_class">
+        <p>Weather</p>
       </div>
       <div @click="onClickMenuBtn('lysi')" :class="lysi_btn_class">
-        <p>Lysi Meter</p>
+        <p>Lysimeter</p>
       </div>
     </div>
-    <div v-if = "content_value" class="content-analysis" id="water">
-      <h1 >Content Water</h1>
-      <ChartWater/>
-
-      
+    <div v-if="content_value ==='Irrigation'" class="content-analysis" id="Irrigation">
+      <h1 >Content Irrigation</h1>
+      <ChartIrrigation/>
     </div>
-    <div v-else class="content-analysis" id="lysimeter">
-      <h1 >Content Lysi meter</h1>
+    <div v-if="content_value ==='weather'" class="content-analysis" id="weather">
+      <h1 >Content Weather</h1>
+      <ChartWater/>
+    </div>
+    <div v-if="content_value ==='lysi'" id="lysimeter">
+      <h1 >Content Lysimeter</h1>
       <ChartLysi/>
       
     </div>
@@ -65,7 +70,10 @@
 #lysimeter{
   background-color: #ffffff;
 }
-#water{
+#Irrigation{
+  background-color: #ffffff;
+}
+#weather{
   background-color: #ffffff;
 }
 .content-analysis {
@@ -77,6 +85,7 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
+import ChartIrrigation from '@/components/ChartIrrigation.vue'
 import ChartWater from '@/components/ChartWater.vue'
 import ChartLysi from '@/components/ChartLysi.vue'
 // import ChartWaterJS from '@/components/ChartWaterJS.js'
@@ -87,31 +96,41 @@ export default {
   name: 'analysis',
   components: {
     HelloWorld,
+    ChartIrrigation,
     ChartWater,
     ChartLysi,
     
   },
   data() {
     return {
-      content_value:true,
-      water_btn_class:"btn-menu-active",
+      content_value:"Irrigation",
+      Irrigation_btn_class:"btn-menu-active",
+      weather_btn_class:"btn-menu",
       lysi_btn_class:"btn-menu"
     }
   },
   methods: {
     onClickMenuBtn:function(name){
-      if(name == 'water')
+      if(name == 'weather')
     {
-      this.water_btn_class = 'btn-menu-active'
+      this.weather_btn_class = 'btn-menu-active'
       this.lysi_btn_class = 'btn-menu'
-      this.content_value=true
+      this.Irrigation_btn_class = 'btn-menu'
+      this.content_value='weather'
     }else if(name == 'lysi'){
-      this.water_btn_class = 'btn-menu'
+      this.weather_btn_class = 'btn-menu'
       this.lysi_btn_class = 'btn-menu-active'
-      this.content_value=false
+      this.Irrigation_btn_class = 'btn-menu'
+      this.content_value='lysi'
+    }
+    else if(name == 'Irrigation'){
+      this.weather_btn_class = 'btn-menu'
+      this.lysi_btn_class = 'btn-menu'
+      this.Irrigation_btn_class = 'btn-menu-active'
+      this.content_value='Irrigation'
     }
     
-    console.log(this.water_btn_class)
+    // console.log(this.weather_btn_class)
     }
   },
 }

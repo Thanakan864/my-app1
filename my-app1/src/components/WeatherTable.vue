@@ -1,5 +1,5 @@
 <template>
-  <div id="Lysi-table">
+  <div id="water-table">
     <div id="app-picker">
       <v-row>
         <div class="textOfDate">
@@ -45,43 +45,21 @@
       <thead>
         <tr>
           <th>Date</th>
-          <th>AWD_Z1</th>
-          <th>AWD_Z2</th>
-          <th>AWD_Z3</th>
-          <th>AWD_Z4</th>
-          <th>AWD_Z5</th>
-          <th>AWD_Z6</th>
-          <th>AWD_Z7</th>
-          <th>AWD_Z8</th>
-          <th>AWD_Z9</th>
-          <th>AWD_Z10</th>
-          <th>AWD_Z11</th>
-          <th>AWD_Z12</th>
-          <th>AWD_Z13</th>
-          <th>AWD_Z14</th>
-          <th>AWD_Z15</th>
-          <th>AWD_Z16</th>
+          <th>WindSpeed_F2</th>
+          <th>Temperature_F2</th>
+          <th>Humidity_F2</th>
+          <th>Waterlevel_F2</th>
+         
         </tr>
       </thead>
       <tbody>
         <tr v-for="item of this.sprit_data" v-bind:key="item.id">
           <td>{{ item["Date"].substr(0, 10) }}</td>
-          <td>{{ item["AWD_Z1"] }}</td>
-          <td>{{ item["AWD_Z2"] }}</td>
-          <td>{{ item["AWD_Z3"] }}</td>
-          <td>{{ item["AWD_Z4"] }}</td>
-          <td>{{ item["AWD_Z5"] }}</td>
-          <td>{{ item["AWD_Z6"] }}</td>
-          <td>{{ item["AWD_Z7"] }}</td>
-          <td>{{ item["AWD_Z8"] }}</td>
-          <td>{{ item["AWD_Z9"] }}</td>
-          <td>{{ item["AWD_Z10"] }}</td>
-          <td>{{ item["AWD_Z11"] }}</td>
-          <td>{{ item["AWD_Z12"] }}</td>
-          <td>{{ item["AWD_Z13"] }}</td>
-          <td>{{ item["AWD_Z14"] }}</td>
-          <td>{{ item["AWD_Z15"] }}</td>
-          <td>{{ item["AWD_Z16"] }}</td>
+          <td>{{ item["WindSpeed_F2"] }}</td>
+          <td>{{ item["Temperature_F2"] }}</td>
+          <td>{{ item["Humidity_F2"] }}</td>
+          <td>{{ item["Waterlevel_F2"] }}</td>
+          
         </tr>
       </tbody>
     </table>
@@ -125,7 +103,7 @@
 import axios from "axios";
 import XLSX from "xlsx"; // import xlsx
 export default {
-  name: "Lysi-table",
+  name: "water-table",
   data() {
     /// get Datenow - 15 day ///
     var d = new Date();
@@ -210,7 +188,7 @@ export default {
       .get(
         // "https://script.google.com/macros/s/AKfycbyn9rKaQXdHzu3n-ocdq2OdKJmmsxNOlNRKFhiCSDpxPbxsYfD49mvwd52k1Za92WezIw/exec?action=getUsers"
         // "https://script.google.com/macros/s/AKfycbxxE23SBHICIiZaASF6iRKcHh5aunewTXz5kL0RGZJLa-sOAABHNBCwy-GlehVh8wQ/exec?action=getData"
-      "https://script.google.com/macros/s/AKfycbyQvjhX67GAjurkBrO__i5qPuFCqZfC0_h4MLinQbmU82L7fWJE1M8GlcPfn938L08sxw/exec?action=getData"
+        "https://script.google.com/macros/s/AKfycbyS_6UXRFkw3DGNoXa-kk1cFY725ncq_7FpZmC-xXlNP6rp4iLe60ZSQV2t-BsXhHce/exec?action=getData"
       )
       .then((response) => {
         this.info = response.data;

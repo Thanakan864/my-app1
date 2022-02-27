@@ -1,19 +1,26 @@
 <template>
   <div class="search">
     <div class="menu-search">
-      <div @click="onClickMenuBtn('water')" :class="water_btn_class">
-       <p>Water</p>
+      <div @click="onClickMenuBtn('Irrigation')" :class="Table_Irrigation_btn_class">
+        <p>Irrigation</p>
+      </div>
+      <div @click="onClickMenuBtn('weather')" :class="Table_weather_btn_class">
+       <p>Weather</p>
       </div>
       <div @click="onClickMenuBtn('lysi')" :class="lysi_btn_class">
-        <p>Lysi Meter</p>
+        <p>Lysimeter</p>
       </div>
     </div>
-    <div v-if = "content_value" class="content-search" id="water">
-      <h1 >Content Water</h1>
-      <WaterTable/>
+    <div v-if="content_value ==='Irrigation'" class="content-home" id="Irrigation">
+      <h1>Table Irrigation</h1>
+      <IrrigationTable/>
     </div>
-    <div v-else class="content-search" id="lysimeter">
-      <h1 >Content Lysi meter</h1>
+    <div  v-if="content_value ==='weather'" class="content-search" id="weather">
+      <h1 >Table Weather</h1>
+      <WeatherTable/>
+    </div>
+    <div v-else-if="content_value ==='lysi'" id="lysimeter">
+      <h1 >Table Lysi meter</h1>
       <LysiTable/>
     </div>
   </div>
@@ -63,7 +70,7 @@
 #lysimeter{
   background-color: #ffffff;
 }
-#water{
+#weather{
   background-color: #ffffff;
 }
 .content-search {
@@ -76,42 +83,54 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
-import WaterTable from '@/components/WaterTable.vue'
+import WeatherTable from '@/components/WeatherTable.vue'
 import LysiTable from '@/components/LysiTable.vue'
+import IrrigationTable from '@/components/IrrigationTable.vue'
 // import DatePicker from '@/components/DatePicker.vue'
 import DatePicker from 'vue2-datepicker'
 export default {
   name: 'Search',
   components: {
     HelloWorld,
-    WaterTable,
+    WeatherTable,
     LysiTable,
     DatePicker,
+    IrrigationTable,
   },
   data() {
     return {
-      content_value:true,
-      water_btn_class:"btn-menu-active",
+      content_value:"Irrigation",
+      Table_weather_btn_class:"btn-menu",
       lysi_btn_class:"btn-menu",
+      Table_Irrigation_btn_class:"btn-menu-active",
       date:'',
       
     }
   },
   methods: {
     onClickMenuBtn:function(name){
-      if(name == 'water')
+      if(name == 'weather')
     {
-      this.water_btn_class = 'btn-menu-active'
+      this.Table_weather_btn_class = 'btn-menu-active'
       this.lysi_btn_class = 'btn-menu'
-      this.content_value=true
+      this.Table_Irrigation_btn_class = "btn-menu";
+      this.content_value="weather"
     }else if(name == 'lysi'){
-      this.water_btn_class = 'btn-menu'
+      this.Table_weather_btn_class = 'btn-menu'
       this.lysi_btn_class = 'btn-menu-active'
-      this.content_value=false
+      this.Table_Irrigation_btn_class = "btn-menu";
+      this.content_value="lysi"
+    }
+    else if (name == "Irrigation") {
+      this.Table_weather_btn_class = "btn-menu";
+      this.lysi_btn_class = "btn-menu";
+      this.Table_Irrigation_btn_class = "btn-menu-active";
+      // this.content_value = false;
+      this.content_value = "Irrigation";
     }
     
-    console.log(this.water_btn_class)
-    console.log(this.content_value)
+    // console.log(this.Table_weather_btn_class)
+    // console.log(this.content_value)
     }
   },
 }

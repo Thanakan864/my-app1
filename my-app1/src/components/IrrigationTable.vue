@@ -1,5 +1,5 @@
 <template>
-  <div id="water-table">
+  <div id="Irrigation-table">
     <div id="app-picker">
       <v-row>
         <div class="textOfDate">
@@ -17,16 +17,24 @@
           range
           no-title
         ></v-date-picker>
-        <v-btn
+        <v-btn class="btn-ok"
           v-on:click="click_btn()"
-          block
+          min-width=89%
           color="rgb(41 149 250)"
           elevation="2"
-          >OK</v-btn
-        >
+          >OK</v-btn>
       </div>
-
       </div>
+    
+      <div data-app>
+           <v-select
+           v-model="select"
+          :items="items"
+          :menu-props="{ top: true, offsetY: true }"
+          label="Select Data"
+        ></v-select>
+        </div>
+        
       <div class="exprot">
         <v-btn
         v-on:click="onExport()"
@@ -109,7 +117,7 @@
 import axios from "axios";
 import XLSX from "xlsx"; // import xlsx
 export default {
-  name: "water-table",
+  name: "Irrigation-table",
   data() {
     /// get Datenow - 15 day ///
     var d = new Date();
@@ -120,6 +128,8 @@ export default {
     this.date_old = d.toISOString().substr(0, 10);
     /// END get Datenow - 15 day ///
     return {
+      select:'Alternative Wetting and Dryying',
+      items: ['Alternative Wetting and Dryying', 'Saturated soil Irrigation', 'Continuous Flooding'],
       info: null,
       sprit_data: [],
       state_text_click: false,
@@ -271,5 +281,8 @@ table th {
 .picker-dialog {
   position: absolute;
   z-index: 1;
+}
+.btn-ok{
+    padding: 0px 0px;
 }
 </style>
