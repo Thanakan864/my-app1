@@ -482,6 +482,13 @@ table th {
 .ctn-chart-irrigation{
     width: 700px;
     height: 400px;
-    margin: 0 auto;
+    margin: 10px auto;
+}
+.row {
+    display: flex;
+    flex: 1 1 auto;
+    margin-left: 25px;
+    margin-top: 10px;
+    flex-wrap: wrap;
 }
 </style>

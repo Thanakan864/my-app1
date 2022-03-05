@@ -70,6 +70,7 @@
 }
 #lysimeter{
   background-color: #ffffff;
+
 }
 #weather{
   background-color: #ffffff;

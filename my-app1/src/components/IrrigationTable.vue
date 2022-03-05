@@ -29,10 +29,17 @@
       <div data-app>
            <v-select
            v-model="select"
-          :items="items"
-          :menu-props="{ top: true, offsetY: true }"
-          label="Select Data"
-        ></v-select>
+            :hint="`${select.text}, ${select.value}`"
+            :items="items"
+            item-text="text"
+            item-value="value"
+            label="Select"
+            persistent-hint
+            return-object
+            single-line
+          v-on:change="onChange($event)">
+        </v-select>
+
         </div>
         
       <div class="exprot">
@@ -49,7 +56,8 @@
       
     </div>
     <!-- <div class="btn-export"><v-btn v-on:click="onExport()" elevation="2" color="rgba(60, 179, 113,0.5)">Export</v-btn></div> -->
-    <table id="myTable">
+    <div class="Table-irrigation">
+      <table id="myTable">
       <thead>
         <tr>
           <th>Date</th>
@@ -77,6 +85,8 @@
         </tr>
       </tbody>
     </table>
+    </div>
+    
 
     <!-- <div id="app-picker">
       <v-app id="inspire">
@@ -128,8 +138,12 @@ export default {
     this.date_old = d.toISOString().substr(0, 10);
     /// END get Datenow - 15 day ///
     return {
-      select:'Alternative Wetting and Dryying',
-      items: ['Alternative Wetting and Dryying', 'Saturated soil Irrigation', 'Continuous Flooding'],
+      select:{text:'Alternative Wetting and Dryying' ,value:"1"},
+      items: [
+        {text:'Alternative Wetting and Dryying' ,value:"1"},
+        {text:'Saturated soil Irrigation',value:"2"},
+        {text:'Continuous Flooding',value:"3"}
+        ],
       info: null,
       sprit_data: [],
       state_text_click: false,
@@ -144,6 +158,12 @@ export default {
     },
   },
   methods: {
+
+    onChange(event) {
+            console.log("items.value")
+            console.log("event.target.value")
+            
+        },
     click_text: function (event) {
       if (this.state_text_click == false) {
         // console.log("click_text_state=true")
@@ -284,5 +304,17 @@ table th {
 }
 .btn-ok{
     padding: 0px 0px;
+}
+.row {
+    display: flex;
+    flex: 1 1 auto;
+    margin-left: 25px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+.Table-irrigation{
+  margin-top:50px;
+  width: 70vw;
+  text-align: center;
 }
 </style>

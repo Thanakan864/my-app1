@@ -41,7 +41,8 @@
       
     </div>
     <!-- <div class="btn-export"><v-btn v-on:click="onExport()" elevation="2" color="rgba(60, 179, 113,0.5)">Export</v-btn></div> -->
-    <table id="myTable">
+    <div class="Table-weather">
+      <table id="myTable">
       <thead>
         <tr>
           <th>Date</th>
@@ -63,6 +64,8 @@
         </tr>
       </tbody>
     </table>
+    </div>
+    
 
     <!-- <div id="app-picker">
       <v-app id="inspire">
@@ -268,4 +271,16 @@ table th {
   position: absolute;
   z-index: 1;
 }
+.row {
+    display: flex;
+    flex: 1 1 auto;
+    margin-left: 25px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+.Table-weather{
+  margin-top:50px;
+  width: 70vw;
+  text-align: center;
+  }
 </style>

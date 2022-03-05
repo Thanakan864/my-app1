@@ -132,11 +132,12 @@ export default {
   color: #444; */
 }
 .sidebar {
-  grid-area: sidebar;
-  background-color: rgb(84, 92, 100);
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
+    grid-area: sidebar;
+    background-color: rgb(84, 92, 100);
+    width: 100%;
+    height: 150%;
+    max-height: 120%;
+    min-height: 100vh;
 }
 
 .sidebar-logo {

@@ -41,7 +41,8 @@
       
     </div>
     <!-- <div class="btn-export"><v-btn v-on:click="onExport()" elevation="2" color="rgba(60, 179, 113,0.5)">Export</v-btn></div> -->
-    <table id="myTable">
+    <div class="Table-lysimeter">
+       <table id="myTable">
       <thead>
         <tr>
           <th>Date</th>
@@ -85,6 +86,8 @@
         </tr>
       </tbody>
     </table>
+    </div>
+   
 
     <!-- <div id="app-picker">
       <v-app id="inspire">
@@ -256,8 +259,7 @@ table {
   width: 100%;
 }
 
-table td,
-table th {
+td,th {
   border: 1px solid #ddd;
   padding: 8px;
 }
@@ -288,5 +290,23 @@ table th {
 .picker-dialog {
   position: absolute;
   z-index: 1;
+}
+.row {
+    display: flex;
+    flex: 1 1 auto;
+    margin-left: 25px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+.Table-lysimeter{
+  margin-top:50px;
+  width: 70vw;
+  text-align: center;
+  }
+td[data-v-2c40576b], th[data-v-2c40576b] {
+    border: 1px solid #ddd;
+    padding: 10px 0px;
+    font-size: 12px;
+    text-align: center;
 }
 </style>
