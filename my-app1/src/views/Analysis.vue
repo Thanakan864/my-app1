@@ -99,7 +99,6 @@ export default {
     ChartIrrigation,
     ChartWater,
     ChartLysi,
-    
   },
   data() {
     return {

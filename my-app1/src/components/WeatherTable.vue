@@ -218,7 +218,8 @@ export default {
           }
           this.sprit_data = data_select;
           // console.log(data_select)
-        }
+          }
+       
 
         $(document).ready(function () {
           $("#myTable").DataTable();

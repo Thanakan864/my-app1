@@ -14,6 +14,7 @@
     <div v-if="content_value ==='Irrigation'" class="content-home" id="Irrigation">
       <h1>Table Irrigation</h1>
       <IrrigationTable/>
+      
     </div>
     <div  v-if="content_value ==='weather'" class="content-search" id="weather">
       <h1 >Table Weather</h1>
@@ -86,6 +87,7 @@ import HelloWorld from '@/components/HelloWorld.vue'
 import WeatherTable from '@/components/WeatherTable.vue'
 import LysiTable from '@/components/LysiTable.vue'
 import IrrigationTable from '@/components/IrrigationTable.vue'
+// import PlanetChart from './components/PlanetChart.vue'
 // import DatePicker from '@/components/DatePicker.vue'
 import DatePicker from 'vue2-datepicker'
 export default {
@@ -96,6 +98,7 @@ export default {
     LysiTable,
     DatePicker,
     IrrigationTable,
+    // PlanetChart,
   },
   data() {
     return {
