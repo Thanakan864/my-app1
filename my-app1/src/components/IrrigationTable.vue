@@ -1,6 +1,20 @@
 <template>
   <div id="Irrigation-table">
-    <div id="app-picker">
+    <div data-app>
+           <v-select
+           v-model="select"
+            :items="items"
+            item-text="text"
+            item-value="value"
+            label="Select"
+            persistent-hint
+            return-object
+            single-line
+          v-on:change="onChange($event)">
+        </v-select>
+
+        </div>
+    <!-- <div id="app-picker">
       <v-row>
         <div class="textOfDate">
         <v-text-field
@@ -26,21 +40,7 @@
       </div>
       </div>
     
-      <div data-app>
-           <v-select
-           v-model="select"
-            :hint="`${select.text}, ${select.value}`"
-            :items="items"
-            item-text="text"
-            item-value="value"
-            label="Select"
-            persistent-hint
-            return-object
-            single-line
-          v-on:change="onChange($event)">
-        </v-select>
-
-        </div>
+      
         
       <div class="exprot">
         <v-btn
@@ -50,13 +50,22 @@
         >Export</v-btn
       ></div>
       </v-row>
-      
-      
-      
-      
+
+    </div> -->
+     <div v-if="select.text ==='Alternative Wetting and Dryying'">
+       <AlternativeTable/>
     </div>
+    <div v-if="select.text ==='Saturated soil Irrigation'">
+       <SaturatedTable/>
+    </div>
+    <div v-if="select.text ==='Continuous Flooding'">
+       <ContinousTable/>
+    </div>
+    
+    
+    
     <!-- <div class="btn-export"><v-btn v-on:click="onExport()" elevation="2" color="rgba(60, 179, 113,0.5)">Export</v-btn></div> -->
-    <div class="Table-irrigation">
+    <!-- <div class="Table-irrigation">
       <table id="myTable">
       <thead>
         <tr>
@@ -85,7 +94,7 @@
         </tr>
       </tbody>
     </table>
-    </div>
+    </div> -->
     
 
     <!-- <div id="app-picker">
@@ -124,19 +133,27 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-import XLSX from "xlsx"; // import xlsx
+// import axios from "axios";
+// import XLSX from "xlsx"; // import xlsx
+import AlternativeTable from "@/components/Irrigation_AlternativeTable.vue";
+import SaturatedTable from "@/components/Irrigation_SaturatedTable.vue";
+import ContinousTable from "@/components/Irrigation_ContinousTable.vue";
 export default {
   name: "Irrigation-table",
+  components: {
+    AlternativeTable,
+    SaturatedTable,
+    ContinousTable,
+  },
   data() {
     /// get Datenow - 15 day ///
-    var d = new Date();
-    // console.log(d.toLocaleString())
-    // console.log(d.toISOString())
-    this.date_now = d.toISOString().substr(0, 10);
-    d.setDate(d.getDate() - 15);
-    this.date_old = d.toISOString().substr(0, 10);
-    /// END get Datenow - 15 day ///
+    // var d = new Date();
+    // // console.log(d.toLocaleString())
+    // // console.log(d.toISOString())
+    // this.date_now = d.toISOString().substr(0, 10);
+    // d.setDate(d.getDate() - 15);
+    // this.date_old = d.toISOString().substr(0, 10);
+    // /// END get Datenow - 15 day ///
     return {
       select:{text:'Alternative Wetting and Dryying' ,value:"1"},
       items: [
@@ -144,177 +161,174 @@ export default {
         {text:'Saturated soil Irrigation',value:"2"},
         {text:'Continuous Flooding',value:"3"}
         ],
-      info: null,
-      sprit_data: [],
-      state_text_click: false,
-      date_now: null,
-      date_old: null,
-      dates: [this.date_old, this.date_now],
+      // info: null,
+      // sprit_data: [],
+      // state_text_click: false,
+      // date_now: null,
+      // date_old: null,
+      // dates: [this.date_old, this.date_now],
     };
   },
-  computed: {
-    dateRangeText() {
-      return this.dates.join(" ~ ");
-    },
-  },
+  // computed: {
+  //   dateRangeText() {
+  //     return this.dates.join(" ~ ");
+  //   },
+  // },
   methods: {
-
     onChange(event) {
-            console.log("items.value")
-            console.log("event.target.value")
-            
+            // console.log(this.select.text)  
         },
-    click_text: function (event) {
-      if (this.state_text_click == false) {
-        // console.log("click_text_state=true")
-        return (this.state_text_click = true);
-      } else {
-        // console.log("click_text_state=false")
-        return (this.state_text_click = false);
-      }
-    },
-    click_btn: function (event) {
-      // console.log("click_btn_OK")
-      // console.log(this.dates)
-      var select_date = this.dates;
-      var start_date = new Date(select_date[0]);
-      var end_date = new Date(select_date[1]);
-      var sprit_date;
-      // console.log(select_date[0],select_date[1])
+  //   click_text: function (event) {
+  //     if (this.state_text_click == false) {
+  //       // console.log("click_text_state=true")
+  //       return (this.state_text_click = true);
+  //     } else {
+  //       // console.log("click_text_state=false")
+  //       return (this.state_text_click = false);
+  //     }
+  //   },
+  //   click_btn: function (event) {
+  //     // console.log("click_btn_OK")
+  //     // console.log(this.dates)
+  //     var select_date = this.dates;
+  //     var start_date = new Date(select_date[0]);
+  //     var end_date = new Date(select_date[1]);
+  //     var sprit_date;
+  //     // console.log(select_date[0],select_date[1])
 
-      if (select_date[0] == null || select_date[1] == null) {
-        // console.log("no")
-        alert("Please Enter Date for Start to END");
-      }
-      if (start_date > end_date) {
-        alert("Please enter a valid start to end date.");
-      } else {
-        var data_select = [];
-        for (var item of this.info) {
-          sprit_date = new Date(item.Date.substr(0, 10));
-          if (start_date <= sprit_date && sprit_date <= end_date) {
-            // console.log(item)
-            data_select.push(item);
-          }
-        }
-        // console.log(data_select)
-        return (this.state_text_click = false), (this.sprit_data = data_select);
-      }
+  //     if (select_date[0] == null || select_date[1] == null) {
+  //       // console.log("no")
+  //       alert("Please Enter Date for Start to END");
+  //     }
+  //     if (start_date > end_date) {
+  //       alert("Please enter a valid start to end date.");
+  //     } else {
+  //       var data_select = [];
+  //       for (var item of this.info) {
+  //         sprit_date = new Date(item.Date.substr(0, 10));
+  //         if (start_date <= sprit_date && sprit_date <= end_date) {
+  //           // console.log(item)
+  //           data_select.push(item);
+  //         }
+  //       }
+  //       // console.log(data_select)
+  //       return (this.state_text_click = false), (this.sprit_data = data_select);
+  //     }
 
-      var data_select = [];
-      for (var item of this.info) {
-        sprit_date = new Date(item.Date.substr(0, 10));
-        if (start_date <= sprit_date && sprit_date <= end_date) {
-          console.log(item);
-          data_select.push(item);
-        }
-      }
-      console.log(data_select);
-      return (this.state_text_click = false), (this.sprit_data = data_select);
-    },
-    onExport: function (event) {
-      const dataWS = XLSX.utils.json_to_sheet(this.info);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, dataWS);
-      XLSX.writeFile(wb, "export.xlsx");
-    },
+  //     var data_select = [];
+  //     for (var item of this.info) {
+  //       sprit_date = new Date(item.Date.substr(0, 10));
+  //       if (start_date <= sprit_date && sprit_date <= end_date) {
+  //         console.log(item);
+  //         data_select.push(item);
+  //       }
+  //     }
+  //     console.log(data_select);
+  //     return (this.state_text_click = false), (this.sprit_data = data_select);
+  //   },
+  //   onExport: function (event) {
+  //     const dataWS = XLSX.utils.json_to_sheet(this.info);
+  //     const wb = XLSX.utils.book_new();
+  //     XLSX.utils.book_append_sheet(wb, dataWS);
+  //     XLSX.writeFile(wb, "export.xlsx");
+  //   },
   },
-  mounted() {
-    axios
-      .get(
-        // "https://script.google.com/macros/s/AKfycbyn9rKaQXdHzu3n-ocdq2OdKJmmsxNOlNRKFhiCSDpxPbxsYfD49mvwd52k1Za92WezIw/exec?action=getUsers"
-        "https://script.google.com/macros/s/AKfycbxxE23SBHICIiZaASF6iRKcHh5aunewTXz5kL0RGZJLa-sOAABHNBCwy-GlehVh8wQ/exec?action=getData"
-      )
-      .then((response) => {
-        this.info = response.data;
-        // console.log(response.data);
-        var select_date = this.dates;
-        var start_date = new Date(select_date[0]);
-        var end_date = new Date(select_date[1]);
-        var sprit_date;
-        var data_filter = [];
-        var data_select = [];
-        var d;
-        ///// filer set Date to correct /////
-        for (var item of this.info) {
-          d = new Date(item.Date);
-          d.setDate(d.getDate(item.Date) + 1);
-          item.Date = d.toISOString().substr(0, 10);
-          data_filter.push(item);
-        }
-        // console.log("data_filter")
-        // console.log(data_filter)
-        ///// filer data to table follow date your select /////
-        for (var item of data_filter) {
-          sprit_date = new Date(item.Date.substr(0, 10));
-          if (start_date <= sprit_date && sprit_date <= end_date) {
-            // console.log(item)
-            data_select.push(item);
-          }
-          this.sprit_data = data_select;
-          // console.log(data_select)
-        }
+  // mounted() {
+  //   axios
+  //     .get(
+  //       // "https://script.google.com/macros/s/AKfycbyn9rKaQXdHzu3n-ocdq2OdKJmmsxNOlNRKFhiCSDpxPbxsYfD49mvwd52k1Za92WezIw/exec?action=getUsers"
+  //       "https://script.google.com/macros/s/AKfycbxxE23SBHICIiZaASF6iRKcHh5aunewTXz5kL0RGZJLa-sOAABHNBCwy-GlehVh8wQ/exec?action=getData"
+  //     )
+  //     .then((response) => {
+  //       this.info = response.data;
+  //       // console.log(response.data);
+  //       var select_date = this.dates;
+  //       var start_date = new Date(select_date[0]);
+  //       var end_date = new Date(select_date[1]);
+  //       var sprit_date;
+  //       var data_filter = [];
+  //       var data_select = [];
+  //       var d;
+  //       ///// filer set Date to correct /////
+  //       for (var item of this.info) {
+  //         d = new Date(item.Date);
+  //         d.setDate(d.getDate(item.Date) + 1);
+  //         item.Date = d.toISOString().substr(0, 10);
+  //         data_filter.push(item);
+  //       }
+  //       // console.log("data_filter")
+  //       // console.log(data_filter)
+  //       ///// filer data to table follow date your select /////
+  //       for (var item of data_filter) {
+  //         sprit_date = new Date(item.Date.substr(0, 10));
+  //         if (start_date <= sprit_date && sprit_date <= end_date) {
+  //           // console.log(item)
+  //           data_select.push(item);
+  //         }
+  //         this.sprit_data = data_select;
+  //         // console.log(data_select)
+  //       }
 
-        $(document).ready(function () {
-          $("#myTable").DataTable();
-        });
-      });
-  },
+  //       $(document).ready(function () {
+  //         $("#myTable").DataTable();
+  //       });
+  //     });
+  // },
 };
 </script>
 <style scoped>
-table {
+/* table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
-}
+} */
 
-table td,
+/* table td,
 table th {
   border: 1px solid #ddd;
   padding: 8px;
-}
+} */
 
-table tr:nth-child(even) {
+/* table tr:nth-child(even) {
   background-color: #f2f2f2;
-}
+} */
 
-table tr:hover {
+/* table tr:hover {
   background-color: #ddd;
-}
+} */
 
-table th {
+/* table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
   background-color: #2995fa;
   color: white;
-}
-#app-picker {
-  /* position: absolute; */
+} */
+/* #app-picker {
+  
   width: 290px;
   height: auto;
-}
-.dataTables_wrapper {
+} */
+/* .dataTables_wrapper {
   z-index: 0;
-}
-.picker-dialog {
+} */
+/* .picker-dialog {
   position: absolute;
   z-index: 1;
-}
-.btn-ok{
+} */
+/* .btn-ok{
     padding: 0px 0px;
-}
-.row {
+} */
+/* .row {
     display: flex;
     flex: 1 1 auto;
     margin-left: 25px;
     margin-top: 10px;
     flex-wrap: wrap;
-}
-.Table-irrigation{
+} */
+/* .Table-irrigation{
   margin-top:50px;
   width: 70vw;
   text-align: center;
-}
+} */
 </style>
