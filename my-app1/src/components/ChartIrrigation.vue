@@ -9,8 +9,7 @@
             label="Select"
             persistent-hint
             return-object
-            single-line
-          v-on:change="onChange($event)">
+            single-line >
         </v-select>
 
         </div>
