@@ -41,27 +41,35 @@
       <thead>
         <tr>
           <th>Date</th>
-          <th>AWD_A4</th>
-          <th>AWD_A5</th>
-          <th>AWD_A6</th>
-          <th>AWD_E3</th>
-          <th>CTH_C9</th>
-          <th>CTH_C10</th>
-          <th>CTH_C11</th>
-          <th>CTH_C12</th>
+          <th>AWD_A1</th>
+          <th>AWD_A2</th>
+          <th>AWD_A3</th>
+          <th>AWD_E1</th>
+          <th>CTH_C1</th>
+          <th>CTH_C2</th>
+          <th>CTH_C3</th>
+          <th>CTH_C4</th>
+          <th>Water_F1</th>
+          <th>Wind_F1</th>
+          <th>Temp_F1</th>
+          <th>Humi_F1</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item of this.sprit_data" v-bind:key="item.id">
           <td>{{ item["Date"].substr(0, 10) }}</td>
-          <td>{{ item["AWD_A4"] }}</td>
-          <td>{{ item["AWD_A5"] }}</td>
-          <td>{{ item["AWD_A6"] }}</td>
-          <td>{{ item["AWD_E3"] }}</td>
-          <td>{{ item["CTH_C9"] }}</td>
-          <td>{{ item["CTH_C10"] }}</td>
-          <td>{{ item["CTH_C11"] }}</td>
-          <td>{{ item["CTH_C12"] }}</td>
+          <td>{{ item["AWD_A1"] }}</td>
+          <td>{{ item["AWD_A2"] }}</td>
+          <td>{{ item["AWD_A3"] }}</td>
+          <td>{{ item["AWD_E1"] }}</td>
+          <td>{{ item["CTH_C1"] }}</td>
+          <td>{{ item["CTH_C2"] }}</td>
+          <td>{{ item["CTH_C3"] }}</td>
+          <td>{{ item["CTH_C4"] }}</td>
+          <td>{{ item["Water_F1"] }}</td>
+          <td>{{ item["Wind_F1"] }}</td>
+          <td>{{ item["Temp_F1"] }}</td>
+          <td>{{ item["Humi_F1"] }}</td>
         </tr>
       </tbody>
     </table>
@@ -158,7 +166,7 @@ export default {
     getDataAlternative : function(event){
       axios
       .get(
-        "https://script.google.com/macros/s/AKfycbxxE23SBHICIiZaASF6iRKcHh5aunewTXz5kL0RGZJLa-sOAABHNBCwy-GlehVh8wQ/exec?action=getData"
+        "https://script.google.com/macros/s/AKfycbw9VEh3hp0KtFrRbfs8PdkG_0ufleVaQE8c9MnDBDKeeeqVkBkMcUrCZYi6TJxonw2VXg/exec?action=getData"
       )
       .then((response) => {
         this.info = response.data;

@@ -76,7 +76,7 @@ export default {
       datacollection: null,
       loaded: false,
       DateOfChart:null,
-      WindSpeed_F1:null,Temperature_F1:null,Humidity_F1:null,Waterlevel_F1:null,WindSpeed_F2:null,Temperature_F2:null,Humidity_F2:null,Waterlevel_F2:null,WindSpeed_F3:null,Temperature_F3:null,Humidity_F3:null,Waterlevel_F3:null
+      AWD_A4:null,AWD_A5:null,AWD_A6:null,AWD_E3:null,CTH_C9:null,CTH_C10:null,CTH_C11:null,CTH_C12:null,Water_F3:null,Wind_F3:null,Temp_F3:null,Humi_F3:null
     };
   },
   computed: {
@@ -88,9 +88,7 @@ export default {
       getData(){
           axios
       .get(
-        // "https://script.google.com/macros/s/AKfycbyn9rKaQXdHzu3n-ocdq2OdKJmmsxNOlNRKFhiCSDpxPbxsYfD49mvwd52k1Za92WezIw/exec?action=getUsers"
-        // "https://script.google.com/macros/s/AKfycbxxE23SBHICIiZaASF6iRKcHh5aunewTXz5kL0RGZJLa-sOAABHNBCwy-GlehVh8wQ/exec?action=getData"
-        "https://script.google.com/macros/s/AKfycbyS_6UXRFkw3DGNoXa-kk1cFY725ncq_7FpZmC-xXlNP6rp4iLe60ZSQV2t-BsXhHce/exec?action=getData"
+                "https://script.google.com/macros/s/AKfycbxpWEZxEVvlvMEJzUBq89y00ML9dpe71J7jYkQ_qyFPc35c-iPg5uszfr7Dzld6z02c/exec?action=getData"
       )
       .then((response) => {
         this.info = response.data;
@@ -103,18 +101,18 @@ export default {
         var data_select = [];
         var d;
         var Date_chart= [];
-        var WindSpeedF1= [];
-        var TemperatureF1= [];
-        var HumidityF1= [];
-        var WaterlevelF1= [];
-        var WindSpeedF2= [];
-        var TemperatureF2= [];
-        var HumidityF2= [];
-        var WaterlevelF2= [];
-        var WindSpeedF3= [];
-        var TemperatureF3= [];
-        var HumidityF3= [];
-        var WaterlevelF3= [];
+        var AWDA4= [];
+        var AWDA5= [];
+        var AWDA6= [];
+        var AWDE3= [];
+        var CTHC9= [];
+        var CTHC10= [];
+        var CTHC11= [];
+        var CTHC12= [];
+        var WaterF3= [];
+        var WindF3= [];
+        var TempF3= [];
+        var HumiF3= [];
         ///// filer set Date to correct /////
         for (var item of this.info) {
           d = new Date(item.Date);
@@ -137,47 +135,47 @@ export default {
           for (var item of data_select) {
             //   console.log(item["Date"].substr(0, 10))
             var d = item["Date"].substr(0, 10)
-            var wind1 = parseInt(item["WindSpeed_F1"])
-            var temp1 = parseInt(item["Temperature_F1"])
-            var humi1 = parseInt(item["Humidity_F1"])
-            var water1 = parseInt(item["Waterlevel_F1"])
-            var wind2 = parseInt(item["WindSpeed_F2"])
-            var temp2 = parseInt(item["Temperature_F2"])
-            var humi2 = parseInt(item["Humidity_F2"])
-            var water2 = parseInt(item["Waterlevel_F2"])
-            var wind3 = parseInt(item["WindSpeed_F3"])
-            var temp3 = parseInt(item["Temperature_F3"])
-            var humi3 = parseInt(item["Humidity_F3"])
-            var water3 = parseInt(item["Waterlevel_F3"])
+            var a4 = parseInt(item["AWD_A4"])
+            var a5 = parseInt(item["AWD_A5"])
+            var a6 = parseInt(item["AWD_A6"])
+            var e1 = parseInt(item["AWD_E3"])
+            var c9 = parseInt(item["CTH_C9"])
+            var c10 = parseInt(item["CTH_C10"])
+            var c11 = parseInt(item["CTH_C11"])
+            var c12 = parseInt(item["CTH_C12"])
+            var water3 = parseInt(item["Water_F3"])
+            var wind3 = parseInt(item["Wind_F3"])
+            var temp3 = parseInt(item["Temp_F3"])
+            var humi3 = parseInt(item["Humi_F3"])
             Date_chart.push(d);
-            WindSpeedF1.push(wind1);
-            TemperatureF1.push(temp1);
-            HumidityF1.push(humi1);
-            WaterlevelF1.push(water1);
-            WindSpeedF2.push(wind2);
-            TemperatureF2.push(temp2);
-            HumidityF2.push(humi2);
-            WaterlevelF2.push(water2);
-            WindSpeedF3.push(wind3);
-            TemperatureF3.push(temp3);
-            HumidityF3.push(humi3);
-            WaterlevelF3.push(water3);
+            AWDA4.push(a4);
+            AWDA5.push(a5);
+            AWDA6.push(a6);
+            AWDE3.push(e1);
+            CTHC9.push(c9);
+            CTHC10.push(c10);
+            CTHC11.push(c11);
+            CTHC12.push(c12);
+            WaterF3.push(water3);
+            WindF3.push(wind3);
+            TempF3.push(temp3);
+            HumiF3.push(humi3);
           }
         //   console.log(Date_chart)
-        //   console.log(WindSpeedF1)
+        //   console.log(AWDA4)
           this.DateOfChart = Date_chart;
-          this.WindSpeed_F1 = WindSpeedF1;
-          this.Temperature_F1 = TemperatureF1;
-          this.Humidity_F1 = HumidityF1;
-          this.Waterlevel_F1 = WaterlevelF1;
-          this.WindSpeed_F2 = WindSpeedF2;
-          this.Temperature_F2 = TemperatureF2;
-          this.Humidity_F2 = HumidityF2;
-          this.Waterlevel_F2 = WaterlevelF2;
-          this.WindSpeed_F3 = WindSpeedF3;
-          this.Temperature_F3 = TemperatureF3;
-          this.Humidity_F3 = HumidityF3;
-          this.Waterlevel_F3 = WaterlevelF3;
+          this.AWD_A4 = AWDA4;
+          this.AWD_A5 = AWDA5;
+          this.AWD_A6 = AWDA6;
+          this.AWD_E3 = AWDE3;
+          this.CTH_C9 = CTHC9;
+          this.CTH_C10 = CTHC10;
+          this.CTH_C11 = CTHC11;
+          this.CTH_C12 = CTHC12;
+          this.Water_F3 = WaterF3;
+          this.Wind_F3 = WindF3;
+          this.Temp_F3 = TempF3;
+          this.Humi_F3 = HumiF3;
        
           this.fillData()
         $(document).ready(function () {
@@ -190,124 +188,124 @@ export default {
                 labels: this.DateOfChart,
                 datasets:[
                     {
-                        label:"WindSpeed_F1(m/s)",
+                        label:"AWD_A4(CM)",
                         backgroundColor: 'rgba(0, 0, 0, 0.0)',
                         borderColor:'red',
                         pointHoverBackgroundColor:'red',
                         pointHoverBorderWidth:1,
                         borderWidth: 2,
                         // pointBorderColor:'undefined',
-                        data: this.WindSpeed_F1,
+                        data: this.AWD_A4,
                     },
                     {
-                        label: 'Temperature_F1(C)',
+                        label: 'AWD_A5(CM)',
                         backgroundColor: 'rgba(0, 0, 0, 0.0)',
                         borderColor:'green',
                         pointHoverBackgroundColor:'green',
                         pointHoverBorderWidth:1,
                         borderWidth: 2,
                         // pointBorderColor:'undefined',
-                        data: this.Temperature_F1
+                        data: this.AWD_A5
                     },
                     {
-                        label: 'Humidity_F1(%)',
+                        label: 'AWD_A6(CM)',
                         backgroundColor: 'rgba(0, 0, 0, 0.0)',
                         borderColor:'blue',
                         pointHoverBackgroundColor:'blue',
                         pointHoverBorderWidth:1,
                         borderWidth: 2,
                         // pointBorderColor:'undefined',
-                        data: this.Humidity_F1
+                        data: this.AWD_A6
                     },
                     {
-                        label: 'Waterlevel_F1(CM)',
+                        label: 'AWD_E3(CM)',
                         backgroundColor: 'rgba(0, 0, 0, 0.0)',
                         borderColor:'purple',
                         pointHoverBackgroundColor:'purple',
                         pointHoverBorderWidth:1,
                         borderWidth: 2,
                         // pointBorderColor:'undefined',
-                        data: this.Waterlevel_F1
+                        data: this.AWD_E3
                     },
                     {
-                        label: 'WindSpeed_F2(m/s)',
+                        label: 'CTH_C9(CM)',
                         backgroundColor: 'rgba(0, 0, 0, 0.0)',
                         borderColor:'brown ',
                         pointHoverBackgroundColor:'brown ',
                         pointHoverBorderWidth:1,
                         borderWidth: 2,
                         // pointBorderColor:'undefined',
-                        data: this.WindSpeed_F2
+                        data: this.CTH_C9
                     },
                     {
-                        label: 'Temperature_F2(C)',
+                        label: 'CTH_C10(CM)',
                         backgroundColor: 'rgba(0, 0, 0, 0.0)',
                         borderColor:'orange ',
                         pointHoverBackgroundColor:'orange ',
                         pointHoverBorderWidth:1,
                         borderWidth: 2,
                         // pointBorderColor:'undefined',
-                        data: this.Temperature_F2
+                        data: this.CTH_C10
                     },
                     {
-                        label: 'Humidity_F2(%)',
+                        label: 'CTH_C11(CM)',
                         backgroundColor: 'rgba(0, 0, 0, 0.0)',
                         borderColor:'pink ',
                         pointHoverBackgroundColor:'pink ',
                         pointHoverBorderWidth:1,
                         borderWidth: 2,
                         // pointBorderColor:'undefined',
-                        data: this.Humidity_F2
+                        data: this.CTH_C11
                     },
                     {
-                        label: 'Waterlevel_F2(CM)',
+                        label: 'CTH_C12(CM)',
                         backgroundColor: 'rgba(0, 0, 0, 0.0)',
                         borderColor:'gold ',
                         pointHoverBackgroundColor:'gold ',
                         pointHoverBorderWidth:1,
                         borderWidth: 2,
                         // pointBorderColor:'undefined',
-                        data: this.Waterlevel_F2
+                        data: this.CTH_C12
                     },
                     {
-                        label: 'WindSpeed_F3(m/s)',
+                        label: 'Water_F3((CM)',
                         backgroundColor: 'rgba(0, 0, 0, 0.0)',
                         borderColor:'black ',
                         pointHoverBackgroundColor:'black ',
                         pointHoverBorderWidth:1,
                         borderWidth: 2,
                         // pointBorderColor:'undefined',
-                        data:this.WindSpeed_F3
+                        data:this.Water_F3
                     },
                     {
-                        label: 'Temperature_F3(C)',
+                        label: 'Wind_F3(m/s)',
                         backgroundColor: 'rgba(0, 0, 0, 0.0)',
                         borderColor:'crimson ',
                         pointHoverBackgroundColor:'crimson ',
                         pointHoverBorderWidth:1,
                         borderWidth: 2,
                         // pointBorderColor:'undefined',
-                        data: this.Temperature_F3
+                        data: this.Wind_F3
                     },
                     {
-                        label: 'Humidity_F3(%)',
+                        label: 'Temp_F3(C)',
                         backgroundColor: 'rgba(0, 0, 0, 0.0)',
                         borderColor:'purple ',
                         pointHoverBackgroundColor:'purple ',
                         pointHoverBorderWidth:1,
                         borderWidth: 2,
                         // pointBorderColor:'undefined',
-                        data: this.Humidity_F3
+                        data: this.Temp_F3
                     },
                     {
-                        label: 'Waterlevel_F3(CM)',
+                        label: 'Humi_F3(%)',
                         backgroundColor: 'rgba(0, 0, 0, 0.0)',
                         borderColor:'indigo ',
                         pointHoverBackgroundColor:'indigo ',
                         pointHoverBorderWidth:1,
                         borderWidth: 2,
                         // pointBorderColor:'undefined',
-                        data: this.Waterlevel_F3
+                        data: this.Humi_F3
                     },
                     
                 ]
@@ -331,18 +329,18 @@ export default {
         var sprit_date;
         var d;
         var Date_chart= [];
-        var WindSpeedF1= [];
-        var TemperatureF1= [];
-        var HumidityF1= [];
-        var WaterlevelF1= [];
-        var WindSpeedF2= [];
-        var TemperatureF2= [];
-        var HumidityF2= [];
-        var WaterlevelF2= [];
-        var WindSpeedF3= [];
-        var TemperatureF3= [];
-        var HumidityF3= [];
-        var WaterlevelF3= [];
+        var AWDA4= [];
+        var AWDA5= [];
+        var AWDA6= [];
+        var AWDE3= [];
+        var CTHC9= [];
+        var CTHC10= [];
+        var CTHC11= [];
+        var CTHC12= [];
+        var WaterF3= [];
+        var WindF3= [];
+        var TempF3= [];
+        var HumiF3= [];
     //   console.log(select_date[0],select_date[1])
 
       if (select_date[0] == null || select_date[1] == null) {
@@ -378,49 +376,49 @@ export default {
       for (var item of data_select) {
             //   console.log(item["Date"].substr(0, 10))
             var d = item["Date"].substr(0, 10)
-            var wind1 = parseInt(item["WindSpeed_F1"])
-            var temp1 = parseInt(item["Temperature_F1"])
-            var humi1 = parseInt(item["Humidity_F1"])
-            var water1 = parseInt(item["Waterlevel_F1"])
-            var wind2 = parseInt(item["WindSpeed_F2"])
-            var temp2 = parseInt(item["Temperature_F2"])
-            var humi2 = parseInt(item["Humidity_F2"])
-            var water2 = parseInt(item["Waterlevel_F2"])
-            var wind3 = parseInt(item["WindSpeed_F3"])
-            var temp3 = parseInt(item["Temperature_F3"])
-            var humi3 = parseInt(item["Humidity_F3"])
-            var water3 = parseInt(item["Waterlevel_F3"])
+            var a4 = parseInt(item["AWD_A4"])
+            var a5 = parseInt(item["AWD_A5"])
+            var a6 = parseInt(item["AWD_A6"])
+            var e1 = parseInt(item["AWD_E3"])
+            var c9 = parseInt(item["CTH_C9"])
+            var c10 = parseInt(item["CTH_C10"])
+            var c11 = parseInt(item["CTH_C11"])
+            var c12 = parseInt(item["CTH_C12"])
+            var water3 = parseInt(item["Water_F3"])
+            var wind3 = parseInt(item["Wind_F3"])
+            var temp3 = parseInt(item["Temp_F3"])
+            var humi3 = parseInt(item["Humi_F3"])
             Date_chart.push(d);
-            WindSpeedF1.push(wind1);
-            TemperatureF1.push(temp1);
-            HumidityF1.push(humi1);
-            WaterlevelF1.push(water1);
-            WindSpeedF2.push(wind2);
-            TemperatureF2.push(temp2);
-            HumidityF2.push(humi2);
-            WaterlevelF2.push(water2);
-            WindSpeedF3.push(wind3);
-            TemperatureF3.push(temp3);
-            HumidityF3.push(humi3);
-            WaterlevelF3.push(water3);
+            AWDA4.push(a4);
+            AWDA5.push(a5);
+            AWDA6.push(a6);
+            AWDE3.push(e1);
+            CTHC9.push(c9);
+            CTHC10.push(c10);
+            CTHC11.push(c11);
+            CTHC12.push(c12);
+            WaterF3.push(water3);
+            WindF3.push(wind3);
+            TempF3.push(temp3);
+            HumiF3.push(humi3);
           }
         //   console.log(Date_chart)
-        //   console.log(WindSpeedF1)
+        //   console.log(AWDA4)
           this.DateOfChart = Date_chart;
-          this.WindSpeed_F1 = WindSpeedF1;
-          this.Temperature_F1 = TemperatureF1;
-          this.Humidity_F1 = HumidityF1;
-          this.Waterlevel_F1 = WaterlevelF1;
-          this.WindSpeed_F2 = WindSpeedF2;
-          this.Temperature_F2 = TemperatureF2;
-          this.Humidity_F2 = HumidityF2;
-          this.Waterlevel_F2 = WaterlevelF2;
-          this.WindSpeed_F3 = WindSpeedF3;
-          this.Temperature_F3 = TemperatureF3;
-          this.Humidity_F3 = HumidityF3;
-          this.Waterlevel_F3 = WaterlevelF3;
-        //   console.log("done")
-       this.fillData()
+          this.AWD_A4 = AWDA4;
+          this.AWD_A5 = AWDA5;
+          this.AWD_A6 = AWDA6;
+          this.AWD_E3 = AWDE3;
+          this.CTH_C9 = CTHC9;
+          this.CTH_C10 = CTHC10;
+          this.CTH_C11 = CTHC11;
+          this.CTH_C12 = CTHC12;
+          this.Water_F3 = WaterF3;
+          this.Wind_F3 = WindF3;
+          this.Temp_F3 = TempF3;
+          this.Humi_F3 = HumiF3;
+       
+          this.fillData()
           
       return (this.state_text_click = false), (this.sprit_data = data_select);
     },

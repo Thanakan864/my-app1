@@ -41,27 +41,43 @@
       <thead>
         <tr>
           <th>Date</th>
-          <th>AWD_A4</th>
-          <th>AWD_A5</th>
-          <th>AWD_A6</th>
-          <th>AWD_E3</th>
-          <th>CTH_C9</th>
-          <th>CTH_C10</th>
-          <th>CTH_C11</th>
-          <th>CTH_C12</th>
+          <th>AWD_B1</th>
+          <th>AWD_B2</th>
+          <th>AWD_B3</th>
+          <th>AWD_E2</th>
+          <th>Soil_D1</th>
+          <th>Soil_D2</th>
+          <th>Soil_D3</th>
+          <th>Soil_D4</th>
+          <th>CTH_C5</th>
+          <th>CTH_C6</th>
+          <th>CTH_C7</th>
+          <th>CTH_C8</th>
+          <th>Water_F2</th>
+          <th>Wind_F2</th>
+          <th>Temp_F2</th>
+          <th>Humi_F2</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item of this.sprit_data" v-bind:key="item.id">
           <td>{{ item["Date"].substr(0, 10) }}</td>
-          <td>{{ item["AWD_A4"] }}</td>
-          <td>{{ item["AWD_A5"] }}</td>
-          <td>{{ item["AWD_A6"] }}</td>
-          <td>{{ item["AWD_E3"] }}</td>
-          <td>{{ item["CTH_C9"] }}</td>
-          <td>{{ item["CTH_C10"] }}</td>
-          <td>{{ item["CTH_C11"] }}</td>
-          <td>{{ item["CTH_C12"] }}</td>
+          <td>{{ item["AWD_B1"] }}</td>
+          <td>{{ item["AWD_B2"] }}</td>
+          <td>{{ item["AWD_B3"] }}</td>
+          <td>{{ item["AWD_E2"] }}</td>
+          <td>{{ item["Soil_D1"] }}</td>
+          <td>{{ item["Soil_D2"] }}</td>
+          <td>{{ item["Soil_D3"] }}</td>
+          <td>{{ item["Soil_D4"] }}</td>
+          <td>{{ item["CTH_C5"] }}</td>
+          <td>{{ item["CTH_C6"] }}</td>
+          <td>{{ item["CTH_C7"] }}</td>
+          <td>{{ item["CTH_C8"] }}</td>
+          <td>{{ item["Water_F2"] }}</td>
+          <td>{{ item["Wind_F2"] }}</td>
+          <td>{{ item["Temp_F2"] }}</td>
+          <td>{{ item["Humi_F2"] }}</td>
         </tr>
       </tbody>
     </table>
@@ -159,11 +175,11 @@ export default {
     getDataAlternative : function(event){
       axios
       .get(
-        "https://script.google.com/macros/s/AKfycbxxE23SBHICIiZaASF6iRKcHh5aunewTXz5kL0RGZJLa-sOAABHNBCwy-GlehVh8wQ/exec?action=getData"
+        "https://script.google.com/macros/s/AKfycbxN3VT7K0Bxw4N6breKfuvvLZQW-j9TFTQdLkGapB7REpBiJQ5ICWUWVB2UdNGiiVKsYw/exec?action=getData"
       )
       .then((response) => {
         this.info = response.data;
-        // console.log(response.data);
+        console.log(response.data);
         var select_date = this.dates;
         var start_date = new Date(select_date[0]);
         var end_date = new Date(select_date[1]);

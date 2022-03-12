@@ -49,6 +49,10 @@
           <th>CTH_C10</th>
           <th>CTH_C11</th>
           <th>CTH_C12</th>
+          <th>Water_F3</th>
+          <th>Wind_F3</th>
+          <th>Temp_F3</th>
+          <th>Humi_F3</th>
         </tr>
       </thead>
       <tbody>
@@ -62,6 +66,10 @@
           <td>{{ item["CTH_C10"] }}</td>
           <td>{{ item["CTH_C11"] }}</td>
           <td>{{ item["CTH_C12"] }}</td>
+          <td>{{ item["Water_F3"] }}</td>
+          <td>{{ item["Wind_F3"] }}</td>
+          <td>{{ item["Temp_F3"] }}</td>
+          <td>{{ item["Humi_F3"] }}</td>
         </tr>
       </tbody>
     </table>
@@ -159,7 +167,7 @@ export default {
     getDataAlternative : function(event){
       axios
       .get(
-        "https://script.google.com/macros/s/AKfycbxxE23SBHICIiZaASF6iRKcHh5aunewTXz5kL0RGZJLa-sOAABHNBCwy-GlehVh8wQ/exec?action=getData"
+        "https://script.google.com/macros/s/AKfycbxpWEZxEVvlvMEJzUBq89y00ML9dpe71J7jYkQ_qyFPc35c-iPg5uszfr7Dzld6z02c/exec?action=getData"
       )
       .then((response) => {
         this.info = response.data;
