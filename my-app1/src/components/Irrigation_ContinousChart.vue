@@ -58,14 +58,14 @@ export default {
         
     },
   data() {
-    /// get Datenow - 15 day ///
+    /// get Datenow - 30 day ///
     var d = new Date();
     // console.log(d.toLocaleString())
     // console.log(d.toISOString())
     this.date_now = d.toISOString().substr(0, 10);
-    d.setDate(d.getDate() - 15);
+    d.setDate(d.getDate() - 30);
     this.date_old = d.toISOString().substr(0, 10);
-    /// END get Datenow - 15 day ///
+    /// END get Datenow - 30 day ///
     return {
       info: null,
       sprit_data: [],

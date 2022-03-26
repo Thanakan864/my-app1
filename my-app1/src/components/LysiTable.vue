@@ -130,14 +130,14 @@ import XLSX from "xlsx"; // import xlsx
 export default {
   name: "Lysi-table",
   data() {
-    /// get Datenow - 15 day ///
+    /// get Datenow - 30 day ///
     var d = new Date();
     // console.log(d.toLocaleString())
     // console.log(d.toISOString())
     this.date_now = d.toISOString().substr(0, 10);
-    d.setDate(d.getDate() - 15);
+    d.setDate(d.getDate() - 30);
     this.date_old = d.toISOString().substr(0, 10);
-    /// END get Datenow - 15 day ///
+    /// END get Datenow - 30 day ///
     return {
       info: null,
       sprit_data: [],
@@ -207,9 +207,28 @@ export default {
       XLSX.utils.book_append_sheet(wb, dataWS);
       XLSX.writeFile(wb, "export.xlsx");
     },
+    FilterTable: function(event){
+      $(document).ready(function () {
+          $("#myTable").DataTable({
+            info:false,
+            lengthChange: false,
+            pageLength: 999999999,
+            scrollY:550,
+            // searching: ture,
+            
+            
+            paging: false,
+            // scrollY: false,
+            // scrollX: false,
+            // searching: false,
+            // scrollbars:false,
+
+          });
+        });
+    }
   },
-  mounted() {
-    axios
+  async mounted() {
+    await axios
       .get(
         // "https://script.google.com/macros/s/AKfycbyn9rKaQXdHzu3n-ocdq2OdKJmmsxNOlNRKFhiCSDpxPbxsYfD49mvwd52k1Za92WezIw/exec?action=getUsers"
         // "https://script.google.com/macros/s/AKfycbxxE23SBHICIiZaASF6iRKcHh5aunewTXz5kL0RGZJLa-sOAABHNBCwy-GlehVh8wQ/exec?action=getData"
@@ -244,12 +263,12 @@ export default {
           this.sprit_data = data_select;
           // console.log(data_select)
         }
-
-        $(document).ready(function () {
-          $("#myTable").DataTable();
-        });
+        
+        
       });
+      await this.FilterTable()
   },
+  
 };
 </script>
 <style scoped>
