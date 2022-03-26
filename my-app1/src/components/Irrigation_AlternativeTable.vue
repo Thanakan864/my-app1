@@ -19,7 +19,7 @@
         ></v-date-picker>
         <v-btn class="btn-ok"
           v-on:click="click_btn()"
-          min-width=89%
+          min-width=100%
           color="rgb(41 149 250)"
           elevation="2"
           >OK</v-btn>
