@@ -206,11 +206,11 @@ export default {
             pageLength: 999999999,
             scrollY:550,
             // searching: ture,
-            
+            "autoWidth": false,
             
             paging: false,
             // scrollY: false,
-            // scrollX: false,
+            scrollX: 550,
             // searching: false,
             // scrollbars:false,
 

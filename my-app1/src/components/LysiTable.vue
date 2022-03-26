@@ -215,9 +215,10 @@ export default {
             pageLength: 999999999,
             scrollY:550,
             // searching: ture,
-            
+            "autoWidth": false,
             
             paging: false,
+            scrollX: 550,
             // scrollY: false,
             // scrollX: false,
             // searching: false,
@@ -278,7 +279,8 @@ table {
   width: 100%;
 }
 
-td,th {
+table td,
+table th {
   border: 1px solid #ddd;
   padding: 8px;
 }
@@ -322,10 +324,5 @@ table th {
   width: 70vw;
   text-align: center;
   }
-td[data-v-2c40576b], th[data-v-2c40576b] {
-    border: 1px solid #ddd;
-    padding: 10px 0px;
-    font-size: 12px;
-    text-align: center;
-}
+
 </style>
